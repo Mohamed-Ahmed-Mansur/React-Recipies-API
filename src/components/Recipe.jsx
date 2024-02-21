@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Recipe({ data }) {
-//   console.log(data);
+  console.log(data);
 
   return data.length < 1 ? (
     <span style={{ display: 'none' }}></span>

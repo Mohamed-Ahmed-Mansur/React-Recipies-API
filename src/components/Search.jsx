@@ -1,54 +1,42 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
+// https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
+// https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian
+
 import React, { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Recipe from './Recipe';
-import axios from 'axios';
 import styled from 'styled-components';
 
-export default function Search({ category }) {
+export default function Search() {
   const [data, setData] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      const res = await axios.get('/Data.json');
-      setData(res.data);
+  const countriesArr = ['American', 'Japanese', 'Thai', 'Italian', 'Egyptian'];
 
-      if (category) {
-        setFilteredRecipes(res.data[category]);
-      } else {
-        setFilteredRecipes(
-          Object.values(res.data).reduce((allRecipes, currentCat) => {
-            return allRecipes.concat(currentCat);
-          }, [])
-        );
+  const getAllData = async () => {
+    for (let key in localStorage) {
+      if (countriesArr.includes(key)) {
+        setData(pre => [...pre, ...JSON.parse(localStorage.getItem(key))]);
+        setFilteredRecipes(pre => [...pre, ...JSON.parse(localStorage.getItem(key))]);
       }
-    } catch (err) {
-      console.log(err);
     }
-  };
+    console.log(data);
+  }
 
   useEffect(() => {
-    fetchData();
+    getAllData();
   }, []);
 
   function search(e) {
     let searchVal = e.target.value;
     let searchResult;
 
-    if (category) {
-      searchResult = data[category].filter((el) => {
-        return el.strMeal.toLowerCase().includes(searchVal.toLowerCase());
-      });
-    } else {
-      searchResult = Object.values(data).reduce((allrecipes, currentCat) => {
-        return allrecipes.concat(
-          currentCat.filter((el) => {
-            return el.strMeal.toLowerCase().includes(searchVal.toLowerCase());
-          })
-        );
-      }, []);
-    }
+    searchResult = data.filter((el) => {
+      return el.strMeal.toLowerCase().includes(searchVal.toLowerCase());
+    })
+
+    console.log(searchResult);
 
     setFilteredRecipes(searchResult);
   }
@@ -106,7 +94,7 @@ const FaSearchIcon = styled(FaSearch)`
 
 const RecipeList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax( 1fr));
+  grid-gap: 10px;
 `;
 

@@ -46,6 +46,7 @@ const Veggie = () => {
             pagination: false,
             drag: 'free',
             gap: '5rem',
+            autoplay: true,
             perPage: 4,
             breakpoints: {
               768: {

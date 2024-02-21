@@ -3,6 +3,7 @@ import { FaPizzaSlice } from "react-icons/fa";
 import { GiNoodles } from "react-icons/gi";
 import { FaHamburger } from "react-icons/fa";
 import { GiChopsticks } from "react-icons/gi";
+import { FaBowlFood } from "react-icons/fa6";
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
@@ -29,6 +30,10 @@ const Country = () => {
             <SLink to={'/cuisine/Japanese'}>
                 <GiChopsticks size={36} />
                 <h4>Japanese</h4>
+            </SLink>
+            <SLink to={'/cuisine/Egyptian'}>
+                <FaBowlFood size={36} />
+                <h4>Egyptian</h4>
             </SLink>
         </List>
     );

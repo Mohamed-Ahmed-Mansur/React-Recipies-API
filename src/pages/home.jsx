@@ -18,7 +18,7 @@ const Home = () => {
         <>
             <Header />
             <div style={{ padding: "0% 5%" }}>
-                <Search />
+                {/* <Search /> */}
                 <Country />
                 <Veggie />
                 <Popular />
