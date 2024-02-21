@@ -1,9 +1,10 @@
 import React from 'react';
+import style from '../Styles/Landing.module.css';
 
 export default function Landing() {
   return (
-    <div id="landing">
-      <div className="container-fluid mt-2 mt-sm-4">
+    <div id={style.landing}>
+      <div className="container-fluid my-4">
         <div className="row align-items-center">
           <div className="col-md-6">
             <h1 className="fw-bold">
@@ -27,7 +28,7 @@ export default function Landing() {
 
           <div className="col-md-6 text-center">
             <div className="img-container" style={{maxWidth:'500px'}}>
-              <img src={"images/ramen.png"} className="ramen w-100" alt="ramen" />
+              <img src={"images/ramen.png"} className={`${style.ramen} ramen w-100`} alt="ramen" />
             </div>
           </div>
         </div>

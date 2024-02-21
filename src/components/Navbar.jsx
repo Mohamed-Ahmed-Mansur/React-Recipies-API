@@ -1,4 +1,5 @@
 import React from 'react';
+import style from '../Styles/Navbar.module.css';
 
 export default function Navbar() {
   return (
@@ -8,15 +9,14 @@ export default function Navbar() {
           <a className="navbar-brand" href="/">
             <div className="d-flex gap-2 align-items-center">
               <img
-                src={"images/logo.jpg"}
+                src={'images/chef.svg'}
                 alt="logo"
                 style={{ color: '#1c1c1c', width: '70px' }}
-                className='chefLogo'
+                className={style.chefLogo}
               />
-              <span
-                style={{ fontFamily: 'Lobster, sans-serif', fontSize: '1.6em' }} className='tastyBite'
-              >
-                Tasty <span style={{ color: '#198754' }}>Bite</span>
+              <span className={style.tastyBite}>
+                <span> Tasty</span>{' '}
+                <span style={{ color: '#198754' }}>Bite</span>
               </span>
             </div>
           </a>
@@ -28,14 +28,14 @@ export default function Navbar() {
             aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            style={{border:'none'}}
+            style={{ border: 'none' }}
           >
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav m-auto">
+            <ul className={`${style.navList} navbar-nav m-auto`}>
               <li className="nav-item px-1">
-                <a className="nav-link active" aria-current="page" href="/">
+                <a className="nav-link active" aria-current="page" href="/home">
                   Home
                 </a>
               </li>
