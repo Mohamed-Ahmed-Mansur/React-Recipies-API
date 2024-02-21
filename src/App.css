@@ -1,0 +1,46 @@
+.navbar-expand-lg .navbar-nav .nav-link {
+    font-weight: 600;
+}
+  
+.navbar-nav .nav-link.active {
+    font-weight: 700;
+    color: #198754 !important;
+}
+  
+#header {
+    background: url('./Assests/images/landingBG.svg') no-repeat;
+    background-position: right;
+}
+  
+#landing .ramen {
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+  
+#navBar .chefLogo {
+    font-family: "Lobster", sans-serif;
+    font-size: 1.6em;
+}
+  
+@media only screen and (max-width: 767px) {
+    #header  {
+      background-position: calc(100% + 330px) -200px;
+    }
+    #landing {
+      margin-top: 40px;
+      text-align: center;
+    }
+}
+  
+@media only screen and (max-width: 575px) {
+    #header  {
+        background-position: calc(100% + 250px) -120px;
+    }
+  
+    .navbar-brand .tastyBite {
+      font-size: 1.2em !important; 
+    }
+
+    .navbar-brand .chefLogo {
+      width: 50px !important;
+    }
+}

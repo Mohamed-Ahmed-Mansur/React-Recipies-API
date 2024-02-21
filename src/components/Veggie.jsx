@@ -12,21 +12,19 @@ const Veggie = () => {
     async function getVeggie() {
         const check = localStorage.getItem("veggie");
 
-        if(check) {
+        if (check) {
             setVeggie(JSON.parse(check));
-        }else {
-            const data1 = await fetch(API_RANDOM_URL).then(response => response.json()).then(data => data);
-            const data2 = await fetch(API_RANDOM_URL).then(response => response.json()).then(data => data);
-            const data3 = await fetch(API_RANDOM_URL).then(response => response.json()).then(data => data);
-            const data4 = await fetch(API_RANDOM_URL).then(response => response.json()).then(data => data);
-            const data5 = await fetch(API_RANDOM_URL).then(response => response.json()).then(data => data);
-            const data6 = await fetch(API_RANDOM_URL).then(response => response.json()).then(data => data);
-            const data7 = await fetch(API_RANDOM_URL).then(response => response.json()).then(data => data);
-            const data8 = await fetch(API_RANDOM_URL).then(response => response.json()).then(data => data);
-            const data9 = await fetch(API_RANDOM_URL).then(response => response.json()).then(data => data);
-            setVeggie([data1, data2, data3, data4, data5, data6, data7, data8, data9]);
-            localStorage.setItem("veggie", JSON.stringify([data1, data2, data3, data4, data5, data6, data7, data8, data9]));
-        }    
+        } else {
+            const fetchRandomData = async () => {
+                const response = await fetch(API_RANDOM_URL);
+                const data = await response.json();
+                return data;
+            };
+
+            const fetchedData = await Promise.all(Array.from({ length: 9 }, () => fetchRandomData()));
+            setVeggie(fetchedData);
+            localStorage.setItem("veggie", JSON.stringify(fetchedData));
+        }
     }
 
     const handleResize = () => {
@@ -57,6 +55,7 @@ const Veggie = () => {
         <div>
             <Wrapper>
                 <h3>Veggies</h3>
+                <Wrapper></Wrapper>
                 <Splide options={{
                     perPage: perPage,
                     arrows: false,

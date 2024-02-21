@@ -7,9 +7,14 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 const Country = () => {
+
+    async function handleClick(e) {
+        console.log(e.target.innerHTML)
+    }
+
     return (
         <List>
-            <SLink to={'/cuisine/Italian'}>
+            <SLink onClick={handleClick}>
                 <FaPizzaSlice size={36} />
                 <h4>Italian</h4>
             </SLink>
@@ -34,8 +39,9 @@ const List = styled.div`
     justify-content: center;
     margin: 2rem 0rem;
 
-    @media (max-width: 480px) {
-        flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    @media (max-width: 780px) {
+        flex-wrap: wrap;
+        gap: 2rem;
         justify-content: center;
     }
 `;
@@ -62,7 +68,7 @@ const SLink = styled(NavLink)`
 
     svg {
         color: white;
-        font-size: 1.5rem; /* Adjust icon size */
+        font-size: 1.5rem;
     }
 
     &.active {
@@ -78,11 +84,11 @@ const SLink = styled(NavLink)`
     }
 
     &:hover {
-        transform: scale(1.1); /* Scale up on hover */
+        transform: scale(1.1);
     }
 
     @media (max-width: 480px) {
-        margin: 1rem; /* Adjust margin for smaller screens */
+        margin: 1rem;
     }
 `;
 

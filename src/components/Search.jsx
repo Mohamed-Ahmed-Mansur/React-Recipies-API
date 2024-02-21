@@ -9,26 +9,26 @@ export default function Search({ category }) {
   const [data, setData] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get('/Data.json');
-        setData(res.data);
+  const fetchData = async () => {
+    try {
+      const res = await axios.get('/Data.json');
+      setData(res.data);
 
-        if (category) {
-          setFilteredRecipes(res.data[category]);
-        } else {
-          setFilteredRecipes(
-            Object.values(res.data).reduce((allRecipes, currentCat) => {
-              return allRecipes.concat(currentCat);
-            }, [])
-          );
-        }
-      } catch (err) {
-        console.log(err);
+      if (category) {
+        setFilteredRecipes(res.data[category]);
+      } else {
+        setFilteredRecipes(
+          Object.values(res.data).reduce((allRecipes, currentCat) => {
+            return allRecipes.concat(currentCat);
+          }, [])
+        );
       }
-    };
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 

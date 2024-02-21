@@ -1,0 +1,18 @@
+.Link {
+  text-decoration: none;
+  color: gray;
+}
+p {
+  color: gray;
+  font-weight: 640;
+}
+input {
+  height: 50px;
+}
+button {
+  background-color: #b76156;
+}
+i {
+  font-size: 24px;
+  font-weight: bold;
+}

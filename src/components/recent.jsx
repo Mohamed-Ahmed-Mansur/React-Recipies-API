@@ -1,18 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
 
-const Popular = () => {
-    const [popular, setPopular] = useState([]);
+const Recent = () => {
+    const [recent, setRecent] = useState([]);
     const [perPage, setPerPage] = useState(4);
     const API_RANDOM_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
-    async function getPopular() {
-        const check = localStorage.getItem("popular");
+    async function getRecent() {
+        const check = localStorage.getItem("recent");
 
         if (check) {
-            setPopular(JSON.parse(check));
+            setRecent(JSON.parse(check));
         } else {
             const fetchRandomData = async () => {
                 const response = await fetch(API_RANDOM_URL);
@@ -21,8 +22,8 @@ const Popular = () => {
             };
 
             const fetchedData = await Promise.all(Array.from({ length: 9 }, () => fetchRandomData()));
-            setPopular(fetchedData);
-            localStorage.setItem("popular", JSON.stringify(fetchedData));
+            setRecent(fetchedData);
+            localStorage.setItem("recent", JSON.stringify(fetchedData));
         }
     }
 
@@ -38,7 +39,7 @@ const Popular = () => {
     };
 
     useEffect(() => {
-        getPopular();
+        getRecent();
         handleResize();
         window.addEventListener('resize', handleResize);
         return () => {
@@ -48,7 +49,7 @@ const Popular = () => {
 
     return (
         <Wrapper>
-            <h3>Popular Picks</h3>
+            <h3>Recent Recipies</h3>
             <Wrapper></Wrapper>
             <Splide options={{
                 perPage: perPage,
@@ -57,7 +58,7 @@ const Popular = () => {
                 drag: "free",
                 gap: "2rem"
             }}>
-                {popular.map((data, index) => {
+                {recent.map((data, index) => {
                     const meal = data.meals ? data.meals[0] : null;
                     if (!meal) return null;
                     return (
@@ -81,6 +82,19 @@ const Wrapper = styled.div`
     max-width: 1200px; 
 `;
 
+const Card = styled.div`
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+
+    img {
+        width: 100%;
+        display: block;
+        border-radius: 1rem;
+    }
+`;
+
 const Overlay = styled.div`
     position: absolute;
     bottom: 0;
@@ -97,23 +111,4 @@ const Overlay = styled.div`
     }
 `;
 
-const Card = styled.div`
-    position: relative;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-
-    img {
-        width: 100%;
-        display: block;
-        border-radius: 1rem;
-    }
-
-    &:hover {
-        ${Overlay} {
-            top: 0; 
-        }
-    }
-`;
-
-export default Popular;
+export default Recent;
