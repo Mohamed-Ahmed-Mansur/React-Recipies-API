@@ -97,17 +97,23 @@ const Card = styled.div`
 
 const Overlay = styled.div`
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
-    right: 0;
+    width: 100%;
+    height: 100%;
     padding: 1rem;
     background: rgba(0, 0, 0, 0.6);
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    border-radius: 1rem;
+    opacity: 0; /* Initially hide the overlay */
+    transition: opacity 0.3s ease-in-out; /* Add transition effect for smooth appearance */
 
     h4 {
         color: white;
         margin: 0;
+    }
+    
+    ${Card}:hover & {
+        opacity: 1; /* Show the overlay when the parent Card is hovered */
     }
 `;
 
