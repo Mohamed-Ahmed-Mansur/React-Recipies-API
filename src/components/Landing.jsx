@@ -1,9 +1,11 @@
 import React from 'react';
+import style from '../Styles/Landing.module.css';
+import { Link } from 'react-router-dom';
 
 export default function Landing() {
   return (
-    <div id="landing">
-      <div className="container-fluid mt-2 mt-sm-4">
+    <div id={style.landing}>
+      <div className="container-fluid my-4">
         <div className="row align-items-center">
           <div className="col-md-6">
             <h1 className="fw-bold">
@@ -16,18 +18,22 @@ export default function Landing() {
               a Symphony of Flavors / Because Every Meal Should be an
               Experience!
             </p>
-            <button className="btn btn-success shadow-sm px-4">Sign up</button>
+            <button className="btn btn-success shadow-sm px-4">
+              <Link to="/" className="text-white text-decoration-none">
+                Sign up
+              </Link>
+            </button>
             <p className="mt-2">
               Do you have an accout?{' '}
-              <a href="/" className="text-success text-decoration-none fw-bold">
+              <Link to="/" className="text-success text-decoration-none fw-bold">
                 Log in
-              </a>
+              </Link>
             </p>
           </div>
 
           <div className="col-md-6 text-center">
             <div className="img-container" style={{maxWidth:'500px'}}>
-              <img src={"images/ramen.png"} className="ramen w-100" alt="ramen" />
+              <img src={"images/ramen.png"} className={`${style.ramen} ramen w-100`} alt="ramen" />
             </div>
           </div>
         </div>

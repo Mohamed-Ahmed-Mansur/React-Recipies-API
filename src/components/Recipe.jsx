@@ -17,8 +17,7 @@ export default function Recipe({ data }) {
                 className="meal-image"
               />
               <div className="meal-details">
-                <h6>{meal.strMeal}</h6>
-               
+                <h6>{meal.strMeal}</h6> 
               </div>
             </div>
           ))}

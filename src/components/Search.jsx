@@ -2,34 +2,45 @@
 import React, { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Recipe from './Recipe';
-import axios from 'axios';
+// import axios from 'axios';
 import styled from 'styled-components';
 
 export default function Search({ category }) {
   const [data, setData] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const countriesArr = ["American", "Italian", "Thai", "Japanese"];
 
-  const fetchData = async () => {
-    try {
-      const res = await axios.get('/Data.json');
-      setData(res.data);
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await axios.get('/Data.json');
+  //     setData(res.data);
 
-      if (category) {
-        setFilteredRecipes(res.data[category]);
-      } else {
-        setFilteredRecipes(
-          Object.values(res.data).reduce((allRecipes, currentCat) => {
-            return allRecipes.concat(currentCat);
-          }, [])
-        );
+  //     if (category) {
+  //       setFilteredRecipes(res.data[category]);
+  //     } else {
+  //       setFilteredRecipes(
+  //         Object.values(res.data).reduce((allRecipes, currentCat) => {
+  //           return allRecipes.concat(currentCat);
+  //         }, [])
+  //       );
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const getAllData = async () => {
+    for (let key in localStorage) {
+      if (countriesArr.includes(key)) {
+        setData(pre => [...pre, ...JSON.parse(localStorage.getItem(key))]);
       }
-    } catch (err) {
-      console.log(err);
     }
-  };
+    console.log(data);
+  }
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
+    getAllData();
   }, []);
 
   function search(e) {

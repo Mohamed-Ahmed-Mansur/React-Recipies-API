@@ -1,7 +1,5 @@
 // import Categories from "../components/Categories";
-import Search from "../components/Search";
 import Veggie from "../components/Veggie";
-import Country from "../components/country";
 import Popular from "../components/popular";
 import React from "react";
 import Recent from "../components/recent";
@@ -18,7 +16,6 @@ const Home = () => {
         <>
             <Header />
             <div style={{ padding: "0% 5%" }}>
-                <Country />
                 <Veggie />
                 <Popular />
                 <Recent />
