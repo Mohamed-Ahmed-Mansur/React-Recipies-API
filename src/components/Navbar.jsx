@@ -56,7 +56,7 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className="nav-item px-1">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/contact">
                   Contact us
                 </Link>
               </li>

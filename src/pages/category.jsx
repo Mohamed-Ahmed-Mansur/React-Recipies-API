@@ -5,41 +5,44 @@ import axios from 'axios';
 import Country from '../components/country';
 import Search from '../components/Search';
 
-const Cuisine = () => {
-    const [cuisine, setCuisine] = useState([]);
-    const countriesArr = ["Egyptian", "American", "Italian", "Thai", "Japanese"];
+const Category = () => {
+    const [category, setCategory] = useState([]);
+    const categoriesArr = JSON.parse(localStorage.getItem("Categories_List")).map(category => {
+        return category.strCategory
+    });
+    // console.log(categoriesArr)
 
-    async function getCountryData(country) {
-        const check = localStorage.getItem(country);
+    async function getCategoriesData(category) {
+        const check = localStorage.getItem(category);
         if (check) {
-            setCuisine(pre => [...pre, ...JSON.parse(check)]);
+            setCategory(pre => [...pre, ...JSON.parse(check)]);
         } else {
-            const { data: { meals } } = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`);
+            const { data: { meals } } = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
             // console.log(meals)
-            setCuisine(pre => [...pre, ...meals]);
-            localStorage.setItem(country, JSON.stringify(meals))
+            setCategory(pre => [...pre, ...meals]);
+            localStorage.setItem(category, JSON.stringify(meals))
         }
     }
 
-    function getCuisine() {
-        countriesArr.map(country => {
-            return getCountryData(country);
+    function getCategories() {
+        categoriesArr.map(country => {
+            return getCategoriesData(country);
         });
     }
 
     useEffect (() =>{   
-        getCuisine();
+        getCategories();
     }, []);
 
     console.log("Cuisine component rendered");
-    console.log(cuisine)
+    console.log(category)
 
     return (
         <Container>
             <Search />
             <Country />
             <Grid>
-                {cuisine.map((item) => (
+                {category.map((item) => (
                     <Card key={item.idMeal}>
                         <img src={item.strMealThumb} alt={item.strMeal} />
                         <h4>{item.strMeal}</h4> 
@@ -92,4 +95,4 @@ const Card = styled.div`
     }
 `;
 
-export default Cuisine;
+export default Category;

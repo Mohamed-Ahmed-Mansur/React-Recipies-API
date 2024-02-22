@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaPizzaSlice } from "react-icons/fa";
 import { GiNoodles } from "react-icons/gi";
 import { FaHamburger } from "react-icons/fa";
@@ -8,13 +7,9 @@ import { NavLink } from 'react-router-dom';
 
 const Country = () => {
 
-    async function handleClick(e) {
-        console.log(e.target.innerHTML)
-    }
-
     return (
         <List>
-            <SLink onClick={handleClick}>
+            <SLink to={'/cuisine/Italian'}>
                 <FaPizzaSlice size={36} />
                 <h4>Italian</h4>
             </SLink>
