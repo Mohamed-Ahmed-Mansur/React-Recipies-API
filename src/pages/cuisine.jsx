@@ -4,9 +4,11 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Country from '../components/country';
 import Search from '../components/Search';
+import { useNavigate } from 'react-router-dom';
 
 const Cuisine = () => {
     const [cuisine, setCuisine] = useState([]);
+    const navigate = useNavigate();
     const countriesArr = ["Egyptian", "American", "Italian", "Thai", "Japanese"];
 
     async function getCountryData(country) {
@@ -27,6 +29,11 @@ const Cuisine = () => {
         });
     }
 
+    function handleClick(meal) {
+        console.log(meal);
+        navigate(`/Details/${meal.idMeal}`);
+    }
+
     useEffect (() =>{   
         getCuisine();
     }, []);
@@ -39,10 +46,10 @@ const Cuisine = () => {
             <Search />
             <Country />
             <Grid>
-                {cuisine.map((item) => (
-                    <Card key={item.idMeal}>
-                        <img src={item.strMealThumb} alt={item.strMeal} />
-                        <h4>{item.strMeal}</h4> 
+                {cuisine.map((meal) => (
+                    <Card key={meal.idMeal} onClick={() => handleClick(meal)}>
+                        <img src={meal.strMealThumb} alt={meal.strMeal} />
+                        <h4>{meal.strMeal}</h4> 
                     </Card>
       
                 ))}
@@ -60,6 +67,7 @@ const Grid = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 3rem;
     justify-items: center;
+    cursor: pointer;
 `;
 
 const Card = styled.div`
