@@ -33,30 +33,30 @@ export default function Navbar() {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse " id="navbarNav">
             <ul className={`${style.navList} navbar-nav m-auto`}>
-              <li className="nav-item px-1">
-                <Link className="nav-link active" aria-current="page" to="/home">
+              <li className="nav-item px-1 ">
+                <Link className="nav-link active fs-6" aria-current="page" to="/home">
                   Home
                 </Link>
               </li>
               <li className="nav-item px-1">
-                <Link className="nav-link" to="/cuisine">
+                <Link className="nav-link fs-6"  to="/cuisine">
                   Recipes
                 </Link>
               </li>
               <li className="nav-item px-1">
-                <Link className="nav-link" to="/addrecpie">
+                <Link className="nav-link fs-6" to="/addrecpie">
                   Add recipe
                 </Link>
               </li>
               <li className="nav-item px-1">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link fs-6" to="/">
                   Blog
                 </Link>
               </li>
               <li className="nav-item px-1">
-                <Link className="nav-link" to="/contact">
+                <Link className="nav-link fs-6" to="/">
                   Contact us
                 </Link>
               </li>

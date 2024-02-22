@@ -2,9 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
+import { useDispatch } from 'react-redux';
+import { getrecpie } from '../redux/slice/Getdetails';
+import { useNavigate } from 'react-router-dom';
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const API_RANDOM_URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
 
   async function getPopular() {
@@ -25,6 +30,13 @@ const Popular = () => {
       setPopular(fetchedData);
       localStorage.setItem('popular', JSON.stringify(fetchedData));
     }
+  }
+
+  function handleClick(meal) {
+    console.log(meal)
+    // console.log("2");
+    dispatch(getrecpie(meal));
+    navigate(`/Details/${meal[0].idMeal}`);
   }
 
   useEffect(() => {
@@ -57,7 +69,7 @@ const Popular = () => {
           if (!meal) return null;
           return (
             <SplideSlide key={index}>
-              <Card>
+              <Card onClick={() => handleClick([meal])}>
                 <img src={meal.strMealThumb} alt={meal.strMeal} />
                 <Overlay>
                   <h4>{meal.strMeal}</h4>

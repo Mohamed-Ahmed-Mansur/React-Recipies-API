@@ -13,7 +13,7 @@ export default function Landing() {
               Join Our
               <span className="text-success"> Food</span> Journey
             </h1>
-            <p className="my-4" style={{ maxWidth: '590px' }}>
+            <p className="my-4 fw-normal " style={{ maxWidth: '590px' }}>
               Recipes to Explore, where Passion Meets Palate, and Every Dish is
               a Symphony of Flavors / Because Every Meal Should be an
               Experience!
@@ -23,7 +23,7 @@ export default function Landing() {
                 Sign up
               </Link>
             </button>
-            <p className="mt-2">
+            <p className="mt-2 fw-normal">
               Do you have an accout?{' '}
               <Link to="/" className="text-success text-decoration-none fw-bold">
                 Log in

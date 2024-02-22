@@ -1,25 +1,39 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import SearchResult from './SearchResult';
-import CountryList from './countryList';
+import { FaSearch } from 'react-icons/fa';
+import SearchResult from '../components/SearchResult';
+import CountryList from '../components/countryList';
+// import CountryList from '../components/countryList';
 
-export default function Search({ allData }) {
+export default function Country() {
   const [data, setData] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState(null);
 
+  const { country } = useParams();
+
   const getAllData = async () => {
-  
-    setData(allData);
-    setFilteredRecipes(allData);
-  
-    console.log(data);
+    let newData = [];
+    let newFilteredRecipes = [];
+
+    if (localStorage[country]) {
+      const parsedData = JSON.parse(localStorage.getItem(country));
+
+      newData = [...newData, ...parsedData];
+      newFilteredRecipes = [...newFilteredRecipes, ...parsedData];
+    }
+
+    setData(newData);
+    setFilteredRecipes(newFilteredRecipes);
+
+    console.log(newData);
   };
 
   useEffect(() => {
-    getAllData();  
-  }, [allData]);
+    console.log(country);
+    getAllData();
+  }, [country]);
 
   function search(e) {
     let searchVal = e.target.value;
@@ -29,11 +43,10 @@ export default function Search({ allData }) {
       return el.strMeal.toLowerCase().includes(searchVal.toLowerCase());
     });
 
+    console.log(searchResult);
+
     setFilteredRecipes(searchResult);
   }
-
-  console.log("Search component rendered");
-  console.log(allData);
 
   return (
     <Container>
@@ -46,7 +59,7 @@ export default function Search({ allData }) {
         />
       </SearchContainer>
 
-      <CountryList />
+      <CountryList/>
 
       <SearchResult filteredData={filteredRecipes}></SearchResult>
     </Container>
