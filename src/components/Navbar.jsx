@@ -1,5 +1,6 @@
 import React from 'react';
 import style from '../Styles/Navbar.module.css';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   return (
@@ -35,39 +36,45 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className={`${style.navList} navbar-nav m-auto`}>
               <li className="nav-item px-1">
-                <a className="nav-link active" aria-current="page" href="/home">
+                <Link className="nav-link active" aria-current="page" to="/home">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item px-1">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/cuisine">
                   Recipes
-                </a>
+                </Link>
               </li>
               <li className="nav-item px-1">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/addrecpie">
                   Add recipe
-                </a>
+                </Link>
               </li>
               <li className="nav-item px-1">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/">
                   Blog
-                </a>
+                </Link>
               </li>
               <li className="nav-item px-1">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/">
                   Contact us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
 
           <div className="signUp d-none d-lg-block d-xl-block d-xxl-block">
             <button className="btn btn-light shadow-sm me-3 px-4">
-              Log in
+              <Link className="nav-link" to="/">
+                Log in
+              </Link>
             </button>
-            <button className="btn btn-success shadow-sm px-4">Sign up</button>
-          </div>
+            <button className="btn btn-success shadow-sm px-4">
+              <Link className="nav-link" to="/">
+                Sign up
+              </Link>
+            </button>
+          </div> 
         </div>
       </nav>
     </div>

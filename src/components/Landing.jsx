@@ -1,5 +1,6 @@
 import React from 'react';
 import style from '../Styles/Landing.module.css';
+import { Link } from 'react-router-dom';
 
 export default function Landing() {
   return (
@@ -17,12 +18,16 @@ export default function Landing() {
               a Symphony of Flavors / Because Every Meal Should be an
               Experience!
             </p>
-            <button className="btn btn-success shadow-sm px-4">Sign up</button>
+            <button className="btn btn-success shadow-sm px-4">
+              <Link to="/" className="text-white text-decoration-none">
+                Sign up
+              </Link>
+            </button>
             <p className="mt-2">
               Do you have an accout?{' '}
-              <a href="/" className="text-success text-decoration-none fw-bold">
+              <Link to="/" className="text-success text-decoration-none fw-bold">
                 Log in
-              </a>
+              </Link>
             </p>
           </div>
 

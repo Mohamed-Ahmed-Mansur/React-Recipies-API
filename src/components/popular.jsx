@@ -5,7 +5,6 @@ import '@splidejs/react-splide/css';
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);
-  const [perPage, setPerPage] = useState(4);
   const API_RANDOM_URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
 
   async function getPopular() {
@@ -34,7 +33,7 @@ const Popular = () => {
 
   return (
     <Wrapper>
-      <h3>Popular Picks</h3>
+      <h3><b>Popular Picks</b></h3>
       <Wrapper></Wrapper>
       <Splide
         options={{
@@ -77,22 +76,6 @@ const Wrapper = styled.div`
   max-width: 1200px;
 `;
 
-const Overlay = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.6);
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-
-  h4 {
-    color: white;
-    margin: 0;
-  }
-`;
-
 const Card = styled.div`
   position: relative;
   border-radius: 1rem;
@@ -104,12 +87,30 @@ const Card = styled.div`
     display: block;
     border-radius: 1rem;
   }
-
-  &:hover {
-    ${Overlay} {
-      top: 0;
-    }
-  }
 `;
+
+const Overlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 1rem;
+    opacity: 0; /* Initially hide the overlay */
+    transition: opacity 0.3s ease-in-out; /* Add transition effect for smooth appearance */
+
+    h4 {
+      color: white;
+      margin: 0;
+    }
+    
+    ${Card}:hover & {
+        opacity: 1; /* Show the overlay when the parent Card is hovered */
+    }
+`;
+
+
 
 export default Popular;

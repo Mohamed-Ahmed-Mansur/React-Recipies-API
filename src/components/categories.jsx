@@ -27,15 +27,35 @@ const Categories = () => {
       <br />
       <Container>
         {categories.map(category => (
-          <Category key={category.idCategory}>
-            <CategoryImage src={category.strCategoryThumb} alt={category.strCategory} />
-            <CategoryName>{category.strCategory}</CategoryName>
-          </Category>
+          <Card>
+            <Category key={category.idCategory}>
+              <CategoryImage src={category.strCategoryThumb} alt={category.strCategory} />
+              <CategoryName>{category.strCategory}</CategoryName>
+            </Category>
+          </Card>
         ))}
       </Container>
     </div>
   );
 };
+const Card = styled.div`
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      display: block;
+      border-radius: 1rem;
+    }
+
+    &:hover {
+      transform: translateY(-5px); /* Move the card up slightly on hover */
+    }
+`;
 
 const Container = styled.div`
   display: flex;

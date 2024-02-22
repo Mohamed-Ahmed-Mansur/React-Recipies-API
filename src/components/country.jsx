@@ -1,100 +1,105 @@
-import React from 'react';
-import { FaPizzaSlice } from "react-icons/fa";
-import { GiNoodles } from "react-icons/gi";
-import { FaHamburger } from "react-icons/fa";
-import { GiChopsticks } from "react-icons/gi";
-import { FaBowlFood } from "react-icons/fa6";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import CountryList from './countryList';
+import Cuisine from '../pages/cuisine';
+import { FaSearch } from 'react-icons/fa';
 
-const Country = () => {
+export default function Country() {
+  const [data, setData] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState(null);
 
-    async function handleClick(e) {
-        console.log(e.target.innerHTML)
+  const { country } = useParams();
+
+  const getAllData = async () => {
+    let newData = [];
+    let newFilteredRecipes = [];
+
+    if (localStorage[country]) {
+      const parsedData = JSON.parse(localStorage.getItem(country));
+
+      newData = [...newData, ...parsedData];
+      newFilteredRecipes = [...newFilteredRecipes, ...parsedData];
     }
 
-    return (
-        <List>
-            <SLink onClick={handleClick}>
-                <FaPizzaSlice size={36} />
-                <h4>Italian</h4>
-            </SLink>
-            <SLink to={'/cuisine/American'}>
-                <FaHamburger size={36} />
-                <h4>American</h4>
-            </SLink>
-            <SLink to={'/cuisine/Thai'}>
-                <GiNoodles size={36} />
-                <h4>Thai</h4>
-            </SLink>
-            <SLink to={'/cuisine/Japanese'}>
-                <GiChopsticks size={36} />
-                <h4>Japanese</h4>
-            </SLink>
-            <SLink to={'/cuisine/Egyptian'}>
-                <FaBowlFood size={36} />
-                <h4>Egyptian</h4>
-            </SLink>
-        </List>
-    );
+    setData(newData);
+    setFilteredRecipes(newFilteredRecipes);
+
+    console.log(newData);
+  };
+
+  useEffect(() => {
+    console.log(country);
+    getAllData();
+  }, [country]);
+
+  function search(e) {
+    let searchVal = e.target.value;
+    let searchResult;
+
+    searchResult = data.filter((el) => {
+      return el.strMeal.toLowerCase().includes(searchVal.toLowerCase());
+    });
+
+    console.log(searchResult);
+
+    setFilteredRecipes(searchResult);
+  }
+
+  return (
+    <Container>
+      <SearchContainer>
+        <FaSearchIcon size={24} />
+        <SearchInput
+          type="text"
+          placeholder="Search for recipes..."
+          onChange={search}
+        />
+      </SearchContainer>
+
+      <CountryList></CountryList>
+
+      <Cuisine cuisine={filteredRecipes}></Cuisine>
+    </Container>
+  );
 }
 
-const List = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 2rem 0rem;
-
-    @media (max-width: 780px) {
-        flex-wrap: wrap;
-        gap: 2rem;
-        justify-content: center;
-    }
+const Container = styled.div`
+  margin: 0 auto;
+  padding: 20px;
 `;
 
-const SLink = styled(NavLink)`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    margin-right: 2rem;
-    text-decoration: none;
-    background: linear-gradient(35deg, #494949, #313131);
-    width: 6rem;
-    height: 6rem;
-    cursor: pointer;
-    transform: scale(1);
-    transition: transform 0.3s ease-in-out;
-
-    h4 {
-        color: white;
-        font-size: 0.8rem;
-    }
-
-    svg {
-        color: white;
-        font-size: 1.5rem;
-    }
-
-    &.active {
-        background: linear-gradient(to right, #f27121, #e94057);
-
-        svg {
-            color: white;
-        }
-
-        h4 {
-            color: white;
-        }
-    }
-
-    &:hover {
-        transform: scale(1.1);
-    }
-
-    @media (max-width: 480px) {
-        margin: 1rem;
-    }
+const SearchContainer = styled.div`
+  max-width: 800px;
+  position: relative;
+  margin: auto;
 `;
 
-export default Country;
+const SearchInput = styled.input`
+  padding: 10px 10px 10px 40px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+
+  &::placeholder {
+    color: #ccc;
+  }
+`;
+
+const FaSearchIcon = styled(FaSearch)`
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #fff;
+  z-index: 1;
+`;
+
+const RecipeList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(1fr));
+  grid-gap: 10px;
+`;

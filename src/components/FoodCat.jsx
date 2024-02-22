@@ -1,8 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
-// https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
-// https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian
-
 import React, { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Recipe from './SearchResult';
@@ -10,31 +5,31 @@ import styled from 'styled-components';
 import Country from './countryList';
 import Cuisine from '../pages/cuisine';
 import CountryList from './countryList';
-import SearchResult from './SearchResult';
+import { NavLink } from 'react-router-dom';
 
-export default function Search() {
+export default function FoodCat() {
   const [data, setData] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState(null);
-
-  const countriesArr = ['American', 'Japanese', 'Thai', 'Italian', 'Egyptian'];
 
   const getAllData = async () => {
     let newData = [];
     let newFilteredRecipes = [];
-  
-    for (let key in localStorage) {
-      if (countriesArr.includes(key)) {
-        const parsedData = JSON.parse(localStorage.getItem(key));
-  
-        newData = [...newData, ...parsedData];
-        newFilteredRecipes = [...newFilteredRecipes, ...parsedData];
-      }
+
+    if (localStorage['Categories_List']) {
+      const parsedData = await JSON.parse(
+        localStorage.getItem('Categories_List')
+      );
+
+      newData = [...newData, ...parsedData];
+      newFilteredRecipes = [...newFilteredRecipes, ...parsedData];
+    } else {
+      return null;
     }
-  
+
     setData(newData);
     setFilteredRecipes(newFilteredRecipes);
-  
-    console.log(newData);
+
+    console.log(filteredRecipes);
   };
 
   useEffect(() => {
@@ -65,9 +60,25 @@ export default function Search() {
         />
       </SearchContainer>
 
-      <CountryList></CountryList>
+      {filteredRecipes ? (
+        <List>
+          {filteredRecipes.map((el) => {
+            //   <SLink to={'/cuisine/Italian'}>
+            <h4>{el.strCategory}</h4>;
+            {
+              /* </SLink> */
+            }
+          })}
+        </List>
+      ) : (
+        <div>loading</div>
+      )}
 
-      <SearchResult cuisine={filteredRecipes}></SearchResult>
+      {/* <Cuisine cuisine={filteredRecipes}></Cuisine> */}
+
+      {/* <RecipeList>
+           <Recipe data={filteredRecipes} />
+         </RecipeList> */}
     </Container>
   );
 }
@@ -110,4 +121,62 @@ const RecipeList = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(1fr));
   grid-gap: 10px;
+`;
+
+const List = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0rem;
+
+  @media (max-width: 780px) {
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+`;
+
+const SLink = styled(NavLink)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-right: 2rem;
+  text-decoration: none;
+  background: linear-gradient(35deg, #494949, #313131);
+  width: 6rem;
+  height: 6rem;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+
+  h4 {
+    color: white;
+    font-size: 0.8rem;
+  }
+
+  svg {
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  &.active {
+    background: linear-gradient(to right, #4fd585, #24aa5a);
+
+    svg {
+      color: white;
+    }
+
+    h4 {
+      color: white;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 480px) {
+    margin: 1rem;
+  }
 `;

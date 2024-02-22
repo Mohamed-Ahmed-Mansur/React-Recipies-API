@@ -1,33 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import styled from 'styled-components';
 import ClipLoader from "react-spinners/ClipLoader";
-// import { useParams } from 'react-router-dom';
-// import axios from 'axios';
-// import Country from '../components/country';
-// import Search from '../components/Search';
 
-const Cuisine = ({cuisine}) => {
+ const SearchResult = ({cuisine}) => {
     console.log(cuisine)
-    // const [cuisine, setCuisine] = useState([]);
-    // const { country } = useParams();
-
-    // async function getCuisine() {
-    //     const check = localStorage.getItem(country);
-
-    //     if (check) {
-    //         setCuisine(JSON.parse(check));
-    //     } else {
-    //         const { data: { meals } } = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`);
-    //         setCuisine(meals);
-    //         localStorage.setItem(country, JSON.stringify(meals));
-    //     }  
-    // }
-
-    // useEffect (() =>{   
-    //     getCuisine();
-    // }, [country]);
-
+   
+    
     if (!cuisine) {
         return <div className='text-center'>
             <ClipLoader color="#198754" />
@@ -101,4 +79,4 @@ const NoDataContainer = styled.div`
   color: #333;
 `;
 
-export default Cuisine;
+export default SearchResult;

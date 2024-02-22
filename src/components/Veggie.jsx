@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
@@ -32,89 +31,89 @@ const Veggie = () => {
     getVeggie();
   }, []);
 
-  console.log('Veggie component rendered');
-  // console.log(veggie)
-
   return (
-    <div>
-      <Wrapper>
-        <h3>Veggies</h3>
-        <Wrapper></Wrapper>
-        <Splide
-          options={{
-            arrows: false,
-            pagination: false,
-            drag: 'free',
-            gap: '5rem',
-            autoplay: true,
-            perPage: 4,
-            breakpoints: {
-              768: {
-                perPage: 2,
-              },
-              480: {
-                perPage: 1,
-              },
+    <Wrapper>
+      <h3><b>Veggies</b></h3>
+      <Splide
+        options={{
+          arrows: false,
+          pagination: false,
+          drag: 'free',
+          gap: '2rem',
+          perPage: 4,
+          breakpoints: {
+            768: {
+              perPage: 2,
             },
-          }}
-        >
-          {veggie.map((data) => {
-            const [meal] = data.meals || [];
-            return (
-              <SplideSlide key={meal.idMeal}>
-                <Card>
-                  <p>{meal.strMeal}</p>
-                  <img src={meal.strMealThumb} alt={meal.strMeal} />
-                </Card>
-                <Gradient />
-              </SplideSlide>
-            );
-          })}
-        </Splide>
-      </Wrapper>
-    </div>
+            480: {
+              perPage: 1,
+            },
+          },
+        }}
+      >
+        {veggie.map((data) => {
+          const [meal] = data.meals || [];
+          return (
+            <SplideSlide key={meal.idMeal}>
+              <Card>
+                <Overlay>
+                  <h4>{meal.strMeal}</h4>
+                </Overlay>
+                <img src={meal.strMealThumb} alt={meal.strMeal} />
+              </Card>
+            </SplideSlide>
+          );
+        })}
+      </Splide>
+    </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   margin: 4rem 0rem;
 `;
+
 const Card = styled.div`
-  min-height: 25rem;
   border-radius: 2rem;
-  // overflow: hidden;
+  overflow: hidden;
+  cursor: pointer;
 
   img {
+    width: 100%;
     border-radius: 2rem;
-    width: 20rem;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    display: block;
     object-fit: cover;
+    transition: transform 0.3s ease-in-out;
   }
-  p {
-    position: absolute;
-    z-index: 10;
-    left: 50%;
-    bottom: 0%;
-    transform: translate(-50%, 0%);
-    color: white;
-    width: 100%;
-    text-align: center;
-    font-weight: 600;
-    font-size: 1rem;
-    height: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+  &:hover img {
+    transform: scale(1.05);
   }
 `;
-const Gradient = styled.div`
-  z-index: 3;
-  position: absolute;
+
+const Overlay = styled.div`
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h4 {
+    color: white;
+    margin: 0;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  ${Card}:hover & {
+    opacity: 1;
+  }
 `;
+
 export default Veggie;
