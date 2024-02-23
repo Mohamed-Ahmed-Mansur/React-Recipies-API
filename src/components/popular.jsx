@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { getrecpie } from '../redux/slice/Getdetails';
+import { useNavigate } from 'react-router-dom';
+// import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
+// import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+// import '@splidejs/react-splide/css';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
+import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
+import '@splidejs/splide/dist/css/splide.min.css';
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const API_RANDOM_URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
 
   async function getPopular() {
@@ -27,90 +36,88 @@ const Popular = () => {
     }
   }
 
+  function handleClick(meal) {
+    console.log(meal);
+    // console.log("2");
+    dispatch(getrecpie(meal));
+    navigate(`/Details/${meal[0].idMeal}`);
+  }
+
   useEffect(() => {
     getPopular();
   }, []);
 
   return (
-    <Wrapper>
-      <h3><b>Popular Picks</b></h3>
-      <Wrapper></Wrapper>
-      <Splide
-        options={{
-          arrows: false,
-          pagination: false,
-          drag: 'free',
-          gap: '2rem',
-          perPage: 4,
-          breakpoints: {
-            768: {
-              perPage: 2,
+    <>
+      <div id="categories" className="mb-3" style={{ marginTop: '5em' }}>
+        <div className="container-fluid mb-4">
+          <div className="row">
+            <h2 style={{ fontWeight: '600' }}>Popular Picks</h2>
+          </div>
+        </div>
+        <Splide
+          options={{
+            type: 'loop',
+            gap: '3em',
+            drag: 'free',
+            arrows: false,
+            pagination: false,
+            perPage: 4,
+            autoScroll: {
+              pauseOnHover: false,
+              pauseOnFocus: false,
+              rewind: false,
+              speed: 1,
             },
-            480: {
-              perPage: 1,
+            breakpoints: {
+              640: { perPage: 3 },
+              500: { perPage: 2 },
             },
-          },
-        }}
-      >
-        {popular.map((data, index) => {
-          const meal = data.meals ? data.meals[0] : null;
-          if (!meal) return null;
-          return (
-            <SplideSlide key={index}>
-              <Card>
-                <img src={meal.strMealThumb} alt={meal.strMeal} />
-                <Overlay>
-                  <h4>{meal.strMeal}</h4>
-                </Overlay>
-              </Card>
-            </SplideSlide>
-          );
-        })}
-      </Splide>
-    </Wrapper>
+          }}
+          extensions={{ AutoScroll }}
+        >
+          {popular.map((data, index) => {
+            const meal = data.meals ? data.meals[0] : null;
+            if (!meal) return null;
+            return (
+              <SplideSlide key={index}>
+                <div
+                  className="overflow-hidden position-relative h-100"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleClick([meal])}
+                >
+                  <div className="border rounded h-100">
+                    <div className="w-100">
+                      <img
+                        className="w-100"
+                        src={meal.strMealThumb}
+                        alt={meal.strMeal}
+                      />
+                      <div
+                        className="position-absolute bg-white rounded py-1 px-2"
+                        style={{ top: '10px', right: '20px' }}
+                      >
+                        {/* <i class="bi bi-bookmark"></i> */}
+                        <i
+                          className="bi bi-bookmark-fill"
+                          style={{ color: '#198754' }}
+                        ></i>
+                      </div>
+                    </div>
+
+                    <div className="p-3">
+                      <h5 className="fw-700">{meal.strMeal}</h5>
+                      <p className="m-0 text-muted">{meal.strArea}</p>
+                    </div>
+                  </div>
+                </div>
+              </SplideSlide>
+            );
+          })}
+        </Splide>
+      </div>
+    </>
   );
 };
-
-const Wrapper = styled.div`
-  margin: 4rem auto;
-  max-width: 1200px;
-`;
-
-const Card = styled.div`
-  position: relative;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-  img {
-    width: 100%;
-    display: block;
-    border-radius: 1rem;
-  }
-`;
-
-const Overlay = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 1rem;
-    opacity: 0; /* Initially hide the overlay */
-    transition: opacity 0.3s ease-in-out; /* Add transition effect for smooth appearance */
-
-    h4 {
-      color: white;
-      margin: 0;
-    }
-    
-    ${Card}:hover & {
-        opacity: 1; /* Show the overlay when the parent Card is hovered */
-    }
-`;
-
-
 
 export default Popular;

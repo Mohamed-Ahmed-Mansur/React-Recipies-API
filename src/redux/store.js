@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cuisineReducer from "./slices/cuisine";
+import getrecpieReducer from "./slice/Getdetails";
 
 const store = configureStore({
-    reducer: {
-        cuisine: cuisineReducer
+    reducer:{
+        getrecpie:getrecpieReducer
     }
-});
+})
 export default store;
+

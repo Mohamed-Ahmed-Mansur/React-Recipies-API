@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
 }
 
 body {
@@ -19,6 +19,15 @@ code {
     monospace;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif !important;
+}
+
 h4 {
   font-size: 1rem;
   color: rgb(56, 56, 56);
@@ -31,6 +40,84 @@ h3 {
   margin: 2rem 0;
 }
 
+p {
+  font-size: 1.2rem;
+}
+
 a {
   color: rgb(56, 56, 56);
 }
+
+/* ---------- NAVBAR ---------- */
+.nav-item .nav-link {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500; 
+}
+
+.nav-item .nav-link.active {
+  color: #198754 !important;
+  font-weight: 600;
+}
+
+
+.tastyBite span {
+  font-family: 'Lobster', sans-serif;
+  font-size: 1.6em;
+}
+
+@media only screen and (max-width: 575px) {
+  .tastyBite span {
+    font-size: 1.2em !important;
+  }
+
+  .chefLogo {
+    width: 50px !important;
+  }
+}
+
+/* END NAVBAR */
+
+/* ---------- FOOTER ---------- */
+#footer .Link {
+  text-decoration: none;
+  color: rgba(33, 37, 41, 0.7);
+}
+
+#footer p {
+  color: rgb(93, 88, 88);
+  font-weight: 640;
+  /* font-family: 'Lobster', sans-serif; */
+  font-size: 1rem;
+}
+
+#footer input {
+  height: 50px;
+}
+
+button {
+  background-color: #b76156;
+}
+
+#footer i {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+
+/* END FOOTER */
+
+/* ------- CONTACT US -------- */
+#contactUs h1 {
+  text-align: center;
+}
+
+#contactUs .form-group {
+  margin-bottom: 20px;
+}
+
+#contactUs label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* END CONTACT US */

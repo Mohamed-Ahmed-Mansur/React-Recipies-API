@@ -2,31 +2,39 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./home";
 import React from "react";
 import Signin from "./signin";
-import AddRecipe from "./AddRecpie";
+import Cuisine from "./cuisine";
 import Search from "../components/Search";
 import Error from "../components/Error";
-import Country from "../components/country";
-import Categories from "../components/categories";
-import FoodCat from "../components/FoodCat";
+import Contact from "../components/contact";
+import Category from "./category";
+import Country from "./country";
+// import Details from "./Details";
+import store from "../redux/store";
+import { Provider } from "react-redux";
+import AddRecipe from "./AddRecipe";
+import Details from "../components/Details";
 
 const Pages = () => {
 
     console.log("Pages component rendered")
     return ( 
         <div>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Signin />}></Route>
-                    <Route path="/home" element={<Home />}></Route>
-                    <Route path="/search" element={<Search />}></Route>
-                    <Route path="/cuisine/:country" element={<Country></Country>}></Route>
-                    <Route path="/cuisine/" element={<Search />}></Route>
-                    <Route path="/categories/" element={<Categories></Categories>}></Route>
-                    <Route path="/cat/" element={<FoodCat></FoodCat>}></Route>
-                    <Route path="/addrecpie" element={<AddRecipe />}></Route>
-                    <Route path="*" element={<Error message="404 - Oops! Something went wrong." />}></Route>
-                </Routes>
-            </BrowserRouter>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Signin />}></Route>
+                        <Route path="/home" element={<Home />}></Route>
+                        <Route path="/search" element={<Search />}></Route>
+                        <Route path="/cuisine" element={<Cuisine />}></Route>
+                        <Route path="/cuisine/:country" element={<Country />}></Route>
+                        <Route path="/category" element={<Category />}></Route>
+                        <Route path="/details/:id" element={<Details />}></Route>
+                        <Route path="/addrecpie" element={<AddRecipe />}></Route>
+                        <Route path="/contact" element={<Contact />}></Route>
+                        <Route path="*" element={<Error message="404 - Oops! Something went wrong." />}></Route>
+                    </Routes>
+                </BrowserRouter>
+            </Provider>
         </div>
     );
 }

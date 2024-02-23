@@ -5,41 +5,25 @@
 
 import React, { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import Recipe from './SearchResult';
 import styled from 'styled-components';
-import Country from './countryList';
-import Cuisine from '../pages/cuisine';
-import CountryList from './countryList';
 import SearchResult from './SearchResult';
+import CountryList from './countryList';
 
-export default function Search() {
+export default function Search({ allData }) {
   const [data, setData] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState(null);
 
-  const countriesArr = ['American', 'Japanese', 'Thai', 'Italian', 'Egyptian'];
-
   const getAllData = async () => {
-    let newData = [];
-    let newFilteredRecipes = [];
   
-    for (let key in localStorage) {
-      if (countriesArr.includes(key)) {
-        const parsedData = JSON.parse(localStorage.getItem(key));
+    setData(allData);
+    setFilteredRecipes(allData);
   
-        newData = [...newData, ...parsedData];
-        newFilteredRecipes = [...newFilteredRecipes, ...parsedData];
-      }
-    }
-  
-    setData(newData);
-    setFilteredRecipes(newFilteredRecipes);
-  
-    console.log(newData);
+    console.log(data);
   };
 
   useEffect(() => {
-    getAllData();
-  }, []);
+    getAllData();  
+  }, [allData]);
 
   function search(e) {
     let searchVal = e.target.value;
@@ -49,10 +33,11 @@ export default function Search() {
       return el.strMeal.toLowerCase().includes(searchVal.toLowerCase());
     });
 
-    console.log(searchResult);
-
     setFilteredRecipes(searchResult);
   }
+
+  console.log("Search component rendered");
+  console.log(allData);
 
   return (
     <Container>
@@ -65,9 +50,9 @@ export default function Search() {
         />
       </SearchContainer>
 
-      <CountryList></CountryList>
+      <CountryList />
 
-      <SearchResult cuisine={filteredRecipes}></SearchResult>
+      <SearchResult filteredData={filteredRecipes}></SearchResult>
     </Container>
   );
 }
@@ -104,10 +89,4 @@ const FaSearchIcon = styled(FaSearch)`
   transform: translateY(-50%);
   color: #fff;
   z-index: 1;
-`;
-
-const RecipeList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(1fr));
-  grid-gap: 10px;
 `;

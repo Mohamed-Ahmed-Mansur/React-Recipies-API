@@ -9,10 +9,6 @@ import { NavLink } from 'react-router-dom';
 
 const CountryList = () => {
 
-    // async function handleClick(e) {
-    //     console.log(e.target.innerHTML)
-    // }
-
     return (
         <List>
             <SLink to={'/cuisine/Italian'}>

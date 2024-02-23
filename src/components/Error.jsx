@@ -4,13 +4,17 @@ import styled from 'styled-components';
 const Error = ({ message }) => {
   return (
     <ErrorWrapper>
-      <ErrorMessage>{message}</ErrorMessage>
+      <ErrorMessage>
+        <h1>404</h1>
+        <img src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif" alt="404"/>
+        <h4>Look like you're lost</h4>
+        <p>{message}</p>
+      </ErrorMessage>
     </ErrorWrapper>
   );
 };
 
 const ErrorWrapper = styled.div`
-  background-color: #ffe6e6;
   color: #ff0000;
   padding: 1rem;
   border-radius: 0.5rem;

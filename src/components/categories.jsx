@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
-  const API_CATEGORIES_LIST_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
+  const API_CATEGORIES_LIST_URL =
+    'https://www.themealdb.com/api/json/v1/1/categories.php';
 
   async function getCategories() {
-    const check = localStorage.getItem("Categories_List");
+    const check = localStorage.getItem('Categories_List');
 
     if (check) {
       setCategories(JSON.parse(check));
     } else {
-      const { categories } = await fetch(API_CATEGORIES_LIST_URL).then(res => res.json()).then(data => data);
+      const { categories } = await fetch(API_CATEGORIES_LIST_URL)
+        .then((res) => res.json())
+        .then((data) => data);
       setCategories(categories);
-      localStorage.setItem("Categories_List", JSON.stringify(categories));
+      localStorage.setItem('Categories_List', JSON.stringify(categories));
     }
   }
 
@@ -21,56 +25,73 @@ const Categories = () => {
     getCategories();
   }, []);
 
+  const displayedCategories = categories.slice(0, 8);
+
   return (
-    <div>
-      <h2>Categories</h2>
-      <br />
-      <Container>
-        {categories.map(category => (
-          <Card>
-            <Category key={category.idCategory}>
-              <CategoryImage src={category.strCategoryThumb} alt={category.strCategory} />
-              <CategoryName>{category.strCategory}</CategoryName>
-            </Category>
-          </Card>
-        ))}
-      </Container>
+    <div className="mb-2" style={{ marginTop: '5em' }}>
+      <div className="container-fluid">
+        <div className="row g-5 mx-auto">
+          <div className="d-flex justify-content-between">
+            <h2 style={{ fontWeight: '600' }}>Categories</h2>
+            <button className="btn">
+              <Link className="text-success text-decoration-none fw-bold">
+                View more
+              </Link>
+            </button>
+          </div>
+          <Container>
+            {displayedCategories.map((category) => (
+              <Card key={category.idCategory}>
+                <Category>
+                  <CategoryImage
+                    src={category.strCategoryThumb}
+                    alt={category.strCategory}
+                  />
+                  <CategoryName>{category.strCategory}</CategoryName>
+                </Category>
+              </Card>
+            ))}
+          </Container>
+        </div>
+      </div>
     </div>
   );
 };
 const Card = styled.div`
-    position: relative;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    display: block;
     border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-    cursor: pointer;
+  }
 
-    img {
-      width: 100%;
-      display: block;
-      border-radius: 1rem;
-    }
-
-    &:hover {
-      transform: translateY(-5px); /* Move the card up slightly on hover */
-    }
+  &:hover img {
+    transform: scale(1.1); /* Zoom in on hover */
+  }
 `;
 
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   gap: 20px;
+  
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
 `;
 
 const Category = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 8px;
   padding: 10px;
+  object-fit: contain;
+  transition: transform 0.3s ease-in-out;
 `;
 
 const CategoryImage = styled.img`
@@ -82,9 +103,11 @@ const CategoryImage = styled.img`
 `;
 
 const CategoryName = styled.h4`
-  font-size: 16px;
-  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
   text-align: center;
+  margin-top: 10px;
 `;
 
 export default Categories;

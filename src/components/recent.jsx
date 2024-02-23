@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const Recent = () => {
   const [recent, setRecent] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const API_RANDOM_URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
 
   async function getRecent() {
@@ -21,11 +22,17 @@ const Recent = () => {
       };
 
       const fetchedData = await Promise.all(
-        Array.from({ length: 9 }, () => fetchRandomData())
+        Array.from({ length: 6 }, () => fetchRandomData())
       );
       setRecent(fetchedData);
       localStorage.setItem('recent', JSON.stringify(fetchedData));
     }
+  }
+
+  function handleClick(meal) {
+    console.log(meal);
+    dispatch(getRecent(meal));
+    navigate(`/Details/${meal[0].idMeal}`);
   }
 
   useEffect(() => {
@@ -33,83 +40,94 @@ const Recent = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <h3><b>Recent Recipies</b></h3>
-      <Wrapper></Wrapper>
-      <Splide
-        options={{
-          arrows: false,
-          pagination: false,
-          drag: 'free',
-          gap: '2rem',
-          perPage: 4,
-          breakpoints: {
-            768: {
-              perPage: 2,
+    <>
+      <div style={{ marginBlock: '5em' }}>
+        <div className="container-fluid">
+          <div className="row g-5 mx-auto">
+            <h2 style={{ fontWeight: '600' }}>Recent recipes</h2>
+            {recent.map((data, index) => {
+              const meal = data.meals ? data.meals[0] : null;
+              if (!meal) return null;
+              return (
+                <div className="col-md-4 col-sm-6" key={meal.idMeal}>
+                  <div
+                    className="overflow-hidden position-relative h-100"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => handleClick([meal])}
+                  >
+                    <div className="border rounded h-100">
+                      <div className="w-100">
+                        <img
+                        style={{height: '300px', objectFit: 'cover'}}
+                          className="w-100"
+                          src={meal.strMealThumb}
+                          alt={meal.strMeal}
+                        />
+                        <div
+                          className="position-absolute bg-white rounded py-1 px-2"
+                          style={{ top: '10px', right: '20px' }}
+                        >
+                          <i class="bi bi-bookmark" style={{ color: '#198754' }}></i>
+                          {/* <i
+                            className="bi bi-bookmark-fill"
+                            style={{ color: '#198754' }}
+                          ></i> */}
+                        </div>
+                      </div>
+
+                      <div className="p-3">
+                        <h5 className="fw-700">{meal.strMeal}</h5>
+                        <p className="m-0 text-muted">{meal.strArea}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* <Wrapper>
+        <h3>
+          <b>Recent Recipies</b>
+        </h3>
+        <Wrapper></Wrapper>
+        <Splide
+          options={{
+            arrows: false,
+            pagination: false,
+            drag: 'free',
+            gap: '2rem',
+            perPage: 4,
+            breakpoints: {
+              768: {
+                perPage: 2,
+              },
+              480: {
+                perPage: 1,
+              },
             },
-            480: {
-              perPage: 1,
-            },
-          },
-        }}
-      >
-        {recent.map((data, index) => {
-          const meal = data.meals ? data.meals[0] : null;
-          if (!meal) return null;
-          return (
-            <SplideSlide key={index}>
-              <Card>
-                <img src={meal.strMealThumb} alt={meal.strMeal} />
-                <Overlay>
-                  <h4>{meal.strMeal}</h4>
-                </Overlay>
-              </Card>
-            </SplideSlide>
-          );
-        })}
-      </Splide>
-    </Wrapper>
+          }}
+        >
+          {recent.map((data, index) => {
+            const meal = data.meals ? data.meals[0] : null;
+            if (!meal) return null;
+            return (
+              <SplideSlide key={index}>
+                <Card>
+                  <img src={meal.strMealThumb} alt={meal.strMeal} />
+                  <Overlay>
+                    <h4>{meal.strMeal}</h4>
+                  </Overlay>
+                </Card>
+              </SplideSlide>
+            );
+          })}
+        </Splide>
+      </Wrapper> */}
+    </>
   );
 };
-
-const Wrapper = styled.div`
-  margin: 4rem auto;
-  max-width: 1200px;
-`;
-
-const Card = styled.div`
-  position: relative;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-  img {
-    width: 100%;
-    display: block;
-    border-radius: 1rem;
-  }
-`;
-
-const Overlay = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 1rem;
-    opacity: 0; /* Initially hide the overlay */
-    transition: opacity 0.3s ease-in-out; /* Add transition effect for smooth appearance */
-
-    h4 {
-      color: white;
-      margin: 0;
-    }
-    
-    ${Card}:hover & {
-        opacity: 1; /* Show the overlay when the parent Card is hovered */
-    }
-`;
 
 export default Recent;

@@ -36,7 +36,11 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className={`${style.navList} navbar-nav m-auto`}>
               <li className="nav-item px-1">
-                <Link className="nav-link active" aria-current="page" to="/home">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/home"
+                >
                   Home
                 </Link>
               </li>
@@ -69,12 +73,42 @@ export default function Navbar() {
                 Log in
               </Link>
             </button>
+
             <button className="btn btn-success shadow-sm px-4">
               <Link className="nav-link" to="/">
                 Sign up
               </Link>
             </button>
-          </div> 
+          </div>
+          <Link to={'/cart'} style={{ color: 'black', position: 'relative' }}>
+            <i
+              className="bi bi-cart3 p-2 mx-2  "
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid black',
+                borderRadius: '10px',
+                width: '60px',
+                height: '60px',
+                textAlign: 'center',
+                cursor: 'pointer',
+              }}
+            ></i>
+            <div
+              className="rounded-circle bg-success d-flex justify-content-center align-items-center"
+              style={{
+                color: 'white',
+                width: '1.5rem',
+                height: '1.5rem',
+                position: 'absolute',
+                bottom: 0,
+                right: 0,
+                transform: 'translate(25%, 25%)',
+              }}
+            >
+              1
+            </div>
+          </Link>
+
         </div>
       </nav>
     </div>
