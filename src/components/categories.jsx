@@ -27,8 +27,8 @@ const Categories = () => {
       <br />
       <Container>
         {categories.map(category => (
-          <Card>
-            <Category key={category.idCategory}>
+          <Card key={category.idCategory}>
+            <Category>
               <CategoryImage src={category.strCategoryThumb} alt={category.strCategory} />
               <CategoryName>{category.strCategory}</CategoryName>
             </Category>

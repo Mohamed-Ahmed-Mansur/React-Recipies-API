@@ -1,22 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { usersAction, usersPostAction } from "../redux/slice/users";
-import { useEffect } from "react";
-import Social from "../components/social";
+import { useNavigate } from "react-router-dom";
+import { usersAction } from "../redux/slice/users";
+import { setLogedInUser } from "../redux/slice/logedInUser";
 
-const Signin = () => {
-  let Users = useSelector((state) => state.users.users);
+const Login = () => {
+  const Users = useSelector((state) => state.users.users);
+  // const loggedInUser = useSelector((state) => state.logedInUser.logedInUser);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  let dispatch = useDispatch();
+
   const [user, setUser] = useState({
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
-    isAdmin: false,
   });
+
+  useEffect(() => {
+    dispatch(usersAction());
+  }, [dispatch]);
 
   const handlechange = (event) => {
     const { name, value } = event.target;
@@ -28,35 +32,22 @@ const Signin = () => {
 
   const handleclick = (event) => {
     event.preventDefault();
+    if (!user.email || !user.password) {
+      console.log("Please fill in all fields.");
+      return;
+    }
+
     const existingUser = Users.find((u) => u.email === user.email);
-    if (
-      user.email.length < 1 ||
-      user.firstName.length < 1 ||
-      user.lastName.length < 1 ||
-      user.password.length < 1
-    ) {
-      alert("Data should not be empty");
-    } else if (existingUser) {
-      alert("Email Already exsists");
-    } else {
-      dispatch(usersPostAction(user));
-      setUser({
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        isAdmin: false,
-      });
+    if (existingUser && user.password === existingUser.password) {
+      console.log("Logged in");
+      dispatch(setLogedInUser(existingUser));
       navigate("/home");
+    } else {
+      console.log("Invalid Email or Password ");
     }
   };
-  useEffect(() => {
-    dispatch(usersAction());
-  }, [dispatch]);
 
   return (
-    <>
-    <Social />
     <section className="text-center text-lg-start">
       <style>
         {`
@@ -75,7 +66,6 @@ const Signin = () => {
       `}
       </style>
 
-      {/* Jumbotron */}
       <div className="container py-4">
         <div className="row g-0 align-items-center">
           <div className="col-lg-6 mb-5 mb-lg-0">
@@ -87,45 +77,8 @@ const Signin = () => {
               }}
             >
               <div className="card-body p-5 shadow-5 text-center">
-                <h2 className="fw-bold mb-5 btngreen">Sign up</h2>
+                <h2 className="fw-bold mb-5 btngreen">Log In</h2>
                 <form onSubmit={handleclick}>
-                  {/* 2 column grid layout with text inputs for the first and last names */}
-                  <div className="row">
-                    <div className="col-md-6 mb-4">
-                      <div className="form-outline">
-                        <input
-                          type="text"
-                          id="form3Example1"
-                          name="firstName"
-                          className="form-control"
-                          placeholder="First name"
-                          onChange={handlechange}
-                        />
-                        <label
-                          className="form-label"
-                          htmlFor="form3Example1"
-                        ></label>
-                      </div>
-                    </div>
-                    <div className="col-md-6 mb-4">
-                      <div className="form-outline">
-                        <input
-                          type="text"
-                          id="form3Example2"
-                          name="lastName"
-                          className="form-control"
-                          placeholder="last name"
-                          onChange={handlechange}
-                        />
-                        <label
-                          className="form-label"
-                          htmlFor="form3Example2"
-                        ></label>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Email input */}
                   <div className="form-outline mb-4">
                     <input
                       type="email"
@@ -141,7 +94,6 @@ const Signin = () => {
                     ></label>
                   </div>
 
-                  {/* Password input */}
                   <div className="form-outline mb-4">
                     <input
                       type="password"
@@ -157,15 +109,13 @@ const Signin = () => {
                     ></label>
                   </div>
 
-                  {/* Submit button */}
                   <button
                     type="submit"
                     className="btn btn-success btn-block mb-4"
                   >
-                    Sign up
+                    Log In
                   </button>
 
-                  {/* Register buttons */}
                   <div className="text-center">
                     <p>or sign up with:</p>
                     <button
@@ -177,7 +127,12 @@ const Signin = () => {
                       </a>
                     </button>
 
-                    {/* <Google /> */}
+                    <button
+                      type="button"
+                      className="  btn btn-link btn-floating mx-1"
+                    >
+                      <i className="fab fa-google btngreen"></i>
+                    </button>
 
                     <button
                       type="button"
@@ -193,14 +148,13 @@ const Signin = () => {
             </div>
           </div>
 
-          <div className="col-lg-6 mb-5 mb-lg-0">
-            <img src="images/5.jpg" className="w-75" alt="spon-photo" />
+          <div className="d-none d-lg-block col-lg-6 mb-5 mb-lg-0">
+            <img src="images/3.jpg" style={{ width: "100%" }} alt="login-photo" />
           </div>
         </div>
       </div>
     </section>
-    </>
   );
 };
 
-export default Signin;
+export default Login;

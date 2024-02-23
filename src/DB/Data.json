@@ -1,0 +1,35 @@
+{
+  "Users": [
+    {
+      "id": "da88",
+      "email": "Hosam.abdelaty2015@gmail.com",
+      "password": "123",
+      "firstName": "Hosam",
+      "lastName": "Abdelaty",
+      "isAdmin": true
+    },
+    {
+      "id": "25ab",
+      "email": "Mohamed@gmail.com",
+      "password": "123",
+      "firstName": "Mohamed",
+      "lastName": "ahmed",
+      "isAdmin": false
+    },
+    {
+      "id": "081b",
+      "email": "mahmoud@gmail.com",
+      "password": "123",
+      "firstName": "mahmoud",
+      "lastName": "ahmed"
+    },
+    {
+      "id": "48f6",
+      "email": "asd@gmail.com",
+      "password": "123",
+      "firstName": "asd",
+      "lastName": "asd",
+      "isAdmin": false
+    }
+  ]
+}

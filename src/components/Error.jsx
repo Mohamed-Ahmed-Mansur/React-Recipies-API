@@ -1,30 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Error = ({ message }) => {
   return (
-    <ErrorWrapper>
-      <ErrorMessage>
-        <h1>404</h1>
-        <img src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif" alt="404"/>
-        <h4>Look like you're lost</h4>
-        <p>{message}</p>
-      </ErrorMessage>
-    </ErrorWrapper>
+    <div className="container d-flex flex-column align-items-center justify-content-center">
+      <h1 className="display-1 text-crimson fw-bold animate__animated animate__bounce" style={{ color: "crimson" }}><Animation>404</Animation></h1>
+      <img className="img-fluid" src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif" alt="404" />
+      <h4 className="mt-3">Looks like you're lost</h4>
+      <p className="text-muted">{message}</p>
+    </div>
   );
 };
 
-const ErrorWrapper = styled.div`
-  color: #ff0000;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-`;
-
-const ErrorMessage = styled.p`
-  margin: 0;
-  font-weight: bold;
-`;
-
 export default Error;
+
+const bounceAnimation = keyframes`
+  0%, 100%   { transform: translateY(0px); }
+  25%        { transform: translateY(-15px); }
+  75%        { transform: translateY(15px); }
+`;
+
+const Animation = styled.div`
+  animation: ${bounceAnimation} 1.5s ease-in-out infinite;
+`;

@@ -12,6 +12,7 @@ import Details from "./Details";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import AddRecipe from "./AddRecipe";
+import Login from "./Login";
 
 const Pages = () => {
 
@@ -21,14 +22,16 @@ const Pages = () => {
             <Provider store={store}>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<Signin />}></Route>
+                        <Route path="/" element={<Home />}></Route>
                         <Route path="/home" element={<Home />}></Route>
+                        <Route path="/signin" element={<Signin />}></Route>
+                        <Route path="/login" element={<Login />}></Route>
                         <Route path="/search" element={<Search />}></Route>
                         <Route path="/cuisine" element={<Cuisine />}></Route>
                         <Route path="/cuisine/:country" element={<Country />}></Route>
                         <Route path="/category" element={<Category />}></Route>
                         <Route path="/details/:id" element={<Details />}></Route>
-                        <Route path="/addrecpie" element={<AddRecipe />}></Route>
+                        <Route path="/addrecipe" element={<AddRecipe />}></Route>
                         <Route path="/contact" element={<Contact />}></Route>
                         <Route path="*" element={<Error message="404 - Oops! Something went wrong." />}></Route>
                     </Routes>
