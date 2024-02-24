@@ -9,22 +9,22 @@ const Blogs = () => {
     <div className="blogs-container">
      
       <div className="blog">
-        <img src="images/Health-Benefits-Of-Fasting-In-Ramadan-01-800x800-1.jpg" alt="Blog 1" className="blog-image1" />
+        <img src="/images/Health-Benefits-Of-Fasting-In-Ramadan-01-800x800-1.jpg" alt="Blog 1" className="blog-image" />
         <h2>Benefits of Fasting</h2>
         <p>May support weight loss. Studies show that controlling the times we eat – or undertaking short-term fasts – may aid weight reduction, fat loss </p>
       </div>
       <div className="blog">
-        <img src="images/sugar-body-diagram-6.jpg" alt="Blog 2" className="blog-image2" />
+        <img src="/images/sugar-body-diagram-6.jpg" alt="Blog 2" className="blog-image" />
         <h2>Impact of suger consumption.</h2>
         <p>there is continued debate regarding the role sugar plays in physical, neurological, and cognitive health. Excessive sugar consumption </p>
       </div>
       <div className="blog">
-        <img src="images/the-anatomy-of-hypertension-poster-chart__43142.jpg" alt="Blog 1" className="blog-image3" />
+        <img src="/images/the-anatomy-of-hypertension-poster-chart__43142.jpg" alt="Blog 1" className="blog-image" />
         <h2>Benefits of Fasting</h2>
         <p>Definition. Low blood pressure occurs when blood pressure is much lower than normal. This means the heart, brain, and other parts of the body may not get enough blood. </p>
       </div>
       <div className="blog">
-        <img src="images/161197234-national-high-blood-pressure-education-month-vector-illustration-suitable-for-greeting-card-poster.jpg" alt="Blog 1" className="blog-image4" />
+        <img src="/images/161197234-national-high-blood-pressure-education-month-vector-illustration-suitable-for-greeting-card-poster.jpg" alt="Blog 1" className="blog-image" />
         <h2>What is Hypertension</h2>
         <p>Hypertension (high blood pressure) is when the pressure in your blood vessels is too high (140/90 mmHg or higher). It is common but can be serious if not treated. </p>
       </div>
@@ -80,3 +80,4 @@ styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
 
 export default Blogs;
+

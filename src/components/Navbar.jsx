@@ -36,10 +36,10 @@ export default function Navbar() {
   }
 
   return (
-    <div id="navBar" style={{ position: "sticky" }}>
+    <div id="navBar">
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <Link to="/" className="navbar-brand">
             <div className="d-flex gap-2 align-items-center">
               <img
                 src={"images/chef.svg"}
@@ -52,7 +52,7 @@ export default function Navbar() {
                 <span style={{ color: "#198754" }}>Bite</span>
               </span>
             </div>
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -69,7 +69,7 @@ export default function Navbar() {
             <ul className={`${style.navList} navbar-nav m-auto`} style={{ fontSize: "1.5rem" }}>
               <li className="nav-item px-1">
                 <Link
-                  className="nav-link active"
+                  className="nav-link"
                   aria-current="page"
                   to="/home"
                 >
@@ -81,9 +81,14 @@ export default function Navbar() {
                   Recipes
                 </Link>
               </li>
+              <li className="nav-item px-1">
+                <Link className="nav-link" to="/category">
+                  Categories
+                </Link>
+              </li>
               {isAdmin && (
                 <li className="nav-item px-1">
-                  <Link className="nav-link" to="/addrecpie">
+                  <Link className="nav-link" to="/addrecipe">
                     Add recipe
                   </Link>
                 </li>
@@ -140,6 +145,35 @@ export default function Navbar() {
               </button>
             </div>
           </div>
+
+          <Link to={'/cart'} style={{ color: 'black', position: 'relative' }}>
+            <i
+              className="bi bi-cart3 p-2 mx-2  "
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid black',
+                borderRadius: '10px',
+                width: '60px',
+                height: '60px',
+                textAlign: 'center',
+                cursor: 'pointer',
+              }}
+            ></i>
+            <div
+              className="rounded-circle bg-success d-flex justify-content-center align-items-center"
+              style={{
+                color: 'white',
+                width: '1.5rem',
+                height: '1.5rem',
+                position: 'absolute',
+                bottom: 0,
+                right: 0,
+                transform: 'translate(25%, 25%)',
+              }}
+            >
+              1
+            </div>
+          </Link>
         </div>
       </nav>
     </div>

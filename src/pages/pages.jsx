@@ -8,11 +8,12 @@ import Error from "../components/Error";
 import Contact from "../components/contact";
 import Category from "./category";
 import Country from "./country";
-import Details from "./Details";
+// import Details from "./Details";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import AddRecipe from "./AddRecipe";
 import Login from "./Login";
+import Details from "../components/Details";
 
 const Pages = () => {
 

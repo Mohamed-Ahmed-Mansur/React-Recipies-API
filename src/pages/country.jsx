@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 import SearchResult from '../components/SearchResult';
 import CountryList from '../components/countryList';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 // import CountryList from '../components/countryList';
 
 export default function Country() {
@@ -49,20 +51,24 @@ export default function Country() {
   }
 
   return (
-    <Container>
-      <SearchContainer>
-        <FaSearchIcon size={24} />
-        <SearchInput
-          type="text"
-          placeholder="Search for recipes..."
-          onChange={search}
-        />
-      </SearchContainer>
+    <>
+      <Navbar />
+      <Container>
+        <SearchContainer>
+          <FaSearchIcon size={24} />
+          <SearchInput
+            type="text"
+            placeholder="Search for recipes..."
+            onChange={search}
+          />
+        </SearchContainer>
 
-      <CountryList/>
+        <CountryList/>
 
-      <SearchResult filteredData={filteredRecipes}></SearchResult>
-    </Container>
+        <SearchResult filteredData={filteredRecipes}></SearchResult>
+      </Container>
+      <Footer />
+    </>
   );
 }
 

@@ -1,4 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
+// https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
+// https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian
+
 import React, { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import styled from 'styled-components';

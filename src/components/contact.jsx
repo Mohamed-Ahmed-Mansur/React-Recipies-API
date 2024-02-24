@@ -48,7 +48,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="container-fluid mt-5">
+    <div id="contactUs" className="container-fluid mt-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <h2 className="text-center">Contact Us</h2>

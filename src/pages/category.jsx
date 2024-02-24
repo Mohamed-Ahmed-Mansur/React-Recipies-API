@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Search from '../components/Search';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Category = () => {
     const [category, setCategory] = useState([]);
@@ -37,9 +39,13 @@ const Category = () => {
     console.log(category)
 
     return (
-        <Container>
-            <Search allData={category} />
-        </Container>
+        <>
+            <Navbar />
+            <Container>
+                <Search allData={category} />
+            </Container>
+            <Footer />
+        </>
     );
 }
 

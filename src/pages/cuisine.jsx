@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Search from '../components/Search';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Cuisine = () => {
     const [cuisine, setCuisine] = useState([]);
@@ -34,9 +36,13 @@ const Cuisine = () => {
     console.log(cuisine)
 
     return (
-        <Container>
-            <Search allData={cuisine} />
-        </Container>
+        <>
+            <Navbar />
+            <Container>
+                <Search allData={cuisine} />
+            </Container>
+            <Footer />
+        </>
     );
 }
 

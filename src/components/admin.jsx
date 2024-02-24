@@ -8,7 +8,7 @@ const Admin = () => {
         <img src="images/admin.jpg" alt="Recipe" className="recipe-image" />
       </div>
       <div className="right-content" style={{ margin: '2rem 1rem'}}>
-        <h1>Share your component</h1>
+        <h1>Share your recipe</h1>
         <p>A recipe is simply defined as a set of instructions with a list of ingredients used to prepare a particular food, dish, or drink. People use recipes to replicate foods they enjoy that they otherwise do not know how to make. Chefs use recipes to make sure a dish tastes the same each time it is ordered.</p>
         <button className="green-button">
           <Link to="/addrecipe" className="nav-link active">
@@ -45,6 +45,7 @@ const styles = `
 
   h1 {
     color: #198754;
+    text-align: center;
   }
 
   p {

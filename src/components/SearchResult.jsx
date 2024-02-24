@@ -1,81 +1,78 @@
-import React from 'react';
-import styled from 'styled-components';
-import ClipLoader from "react-spinners/ClipLoader";
+import React, { useState } from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
 
- const SearchResult = ({filteredData}) => {
-    console.log(filteredData)
+const SearchResult = ({ filteredData }) => {
+  const [displayCount, setDisplayCount] = useState(20);
 
-    if (!filteredData) {
-        return <div className='text-center'>
-            <ClipLoader color="#198754" />
-        </div>
-      }
-    
-      if (filteredData.length === 0) {
-        return <NoDataContainer>No data found</NoDataContainer>;
-      }
-
+  if (!filteredData) {
     return (
-        <Container>
-            <Grid>
-                {filteredData.map((item) => (
-                    <Card key={item.idMeal}>
-                        <img src={item.strMealThumb} alt={item.strMeal} />
-                        <h4>{item.strMeal}</h4> 
-                    </Card>
-                ))}
-            </Grid>
-        </Container>
+      <div className="text-center">
+        <ClipLoader color="#198754" />
+      </div>
     );
-}
+  }
 
-const Container = styled.div`
-    padding: 2rem;
-`;
+  if (filteredData.length === 0) {
+    return <h3>No data found</h3>;
+  }
 
-const Grid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 3rem;
-    justify-items: center;
-`;
+  function handleClick(meal) {
+    console.log(meal);
+  }
 
-const Card = styled.div`
-    width: 100%;
-    max-width: 300px;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+  const handleShowMore = () => {
+    setDisplayCount(displayCount + 4);
+  };
 
-    img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-top-left-radius: 1rem;
-        border-top-right-radius: 1rem;
-    }
+  return (
+    <div style={{ marginBlock: '5em' }}>
+      <div className="container-fluid">
+        <div className="row g-5 mx-auto">
+          {filteredData.slice(0, displayCount).map((data) => {
+            return (
+              <div className="col-lg-3 col-md-4 col-sm-6" key={data.idMeal}>
+                <div
+                  className="overflow-hidden position-relative h-100"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleClick([data])}
+                >
+                  <div className="border rounded h-100">
+                    <div className="w-100">
+                      <img
+                        className="w-100"
+                        src={data.strMealThumb}
+                        alt={data.strMeal}
+                      />
+                      <div
+                        className="position-absolute bg-white rounded py-1 px-2"
+                        style={{ top: '10px', right: '20px' }}
+                      >
+                        {/* <i class="bi bi-bookmark"></i> */}
+                        <i
+                          className="bi bi-bookmark-fill"
+                          style={{ color: '#198754' }}
+                        ></i>
+                      </div>
+                    </div>
 
-    h4 {
-        margin: 0;
-        padding: 1rem;
-        text-align: center;
-        background-color: #f9f9f9;
-        border-bottom-left-radius: 1rem;
-        border-bottom-right-radius: 1rem;
-    }
-
-    &:hover {
-        transform: translateY(-5px);
-    }
-`;
-
-
-const NoDataContainer = styled.div`
-  padding: 2rem;
-  text-align: center;
-  font-size: 1.5rem;
-  color: #333;
-`;
+                    <div className="p-3">
+                      <h5 className="fw-700">{data.strMeal}</h5>
+                      <p className="m-0 text-muted">{data.strArea}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {filteredData.length > displayCount && (
+          <button className="btn btn-primary" onClick={handleShowMore} style={{ margin: "1rem 45%",  }}>
+            Show More
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default SearchResult;
