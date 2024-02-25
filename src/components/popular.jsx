@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { getrecpie } from '../redux/slice/Getdetails';
 import { useNavigate } from 'react-router-dom';
@@ -9,12 +8,14 @@ import { useNavigate } from 'react-router-dom';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import '@splidejs/splide/dist/css/splide.min.css';
+import { useTranslation } from 'react-i18next';
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const API_RANDOM_URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  const [t, i18n] = useTranslation();
 
   async function getPopular() {
     const check = localStorage.getItem('popular');
@@ -49,10 +50,10 @@ const Popular = () => {
 
   return (
     <>
-      <div id="categories" className="mb-3" style={{ marginTop: '5em' }}>
+      <div id="categories" className="mb-3" style={{ marginTop: '5em' }} >
         <div className="container-fluid mb-4">
           <div className="row">
-            <h2 style={{ fontWeight: '600' }}>Popular Picks</h2>
+            <h2 style={{ fontWeight: '600' }}>{t('Popular Picks')}</h2>
           </div>
         </div>
         <Splide
@@ -86,7 +87,7 @@ const Popular = () => {
                   style={{ cursor: 'pointer' }}
                   onClick={() => handleClick([meal])}
                 >
-                  <div className="border rounded h-100">
+                  <div className="border rounded h-100 overflow-hidden">
                     <div className="w-100">
                       <img
                         className="w-100"

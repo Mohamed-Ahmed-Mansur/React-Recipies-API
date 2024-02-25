@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 const SearchResult = ({ filteredData }) => {
@@ -22,47 +21,43 @@ const SearchResult = ({ filteredData }) => {
   }
 
   return (
-    <div style={{ marginBlock: '5em' }}>
-      <div className="container-fluid">
-        <div className="row g-5 mx-auto">
-          {filteredData.map((data) => {
-            return (
-              <div className="col-lg-3 col-md-4 col-sm-6" key={data.idMeal}>
-                <div
-                  className="overflow-hidden position-relative h-100"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => handleClick([data])}
-                >
-                  <div className="border rounded h-100">
-                    <div className="w-100">
-                      <img
-                        className="w-100"
-                        src={data.strMealThumb}
-                        alt={data.strMeal}
-                      />
-                      <div
-                        className="position-absolute bg-white rounded py-1 px-2"
-                        style={{ top: '10px', right: '20px' }}
-                      >
-                        {/* <i class="bi bi-bookmark"></i> */}
-                        <i
-                          className="bi bi-bookmark-fill"
-                          style={{ color: '#198754' }}
-                        ></i>
-                      </div>
-                    </div>
-
-                    <div className="p-3">
-                      <h5 className="fw-700">{data.strMeal}</h5>
-                      <p className="m-0 text-muted">{data.strArea}</p>
-                    </div>
+    <div className="row g-5">
+      {filteredData.map((data) => {
+        return (
+          <div className="col-lg-4 col-md-6" key={data.idMeal}>
+            <div
+              className="overflow-hidden position-relative h-100"
+              style={{ cursor: 'pointer' }}
+              onClick={() => handleClick([data])}
+            >
+              <div className="border rounded h-100 overflow-hidden">
+                <div className="w-100">
+                  <img
+                    className="w-100"
+                    src={data.strMealThumb}
+                    alt={data.strMeal}
+                  />
+                  <div
+                    className="position-absolute bg-white rounded py-1 px-2"
+                    style={{ top: '10px', right: '20px' }}
+                  >
+                    {/* <i class="bi bi-bookmark"></i> */}
+                    <i
+                      className="bi bi-bookmark-fill"
+                      style={{ color: '#198754' }}
+                    ></i>
                   </div>
                 </div>
+
+                <div className="p-3">
+                  <h5 className="fw-700">{data.strMeal}</h5>
+                  <p className="m-0 text-muted">{data.strArea}</p>
+                </div>
               </div>
-            );
-          })}
-        </div>
-      </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

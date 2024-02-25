@@ -1,10 +1,13 @@
 import React from 'react';
 import style from '../Styles/Landing.module.css';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Landing() {
+  const [t, i18n] = useTranslation();
+
   return (
-    <div id={style.landing}>
+    <div id={style.landing} dir={`${i18n.language}`==='en'?"ltr":"rtl"}>
       <div className="container-fluid my-4">
         <div className="row align-items-center">
           <div className="col-md-6">
@@ -12,27 +15,24 @@ export default function Landing() {
               className="fw-bold text-start"
               style={{ fontFamily: 'Poppins,sans-serif' }}
             >
-              Daily Bites, Endless Delights: <br />
-              Join Our
-              <span className="text-success"> Food</span> Journey
+              {t('Daily Bites, Endless Delights: Join Our Food Journey')}
+              <span className="text-success"> {t('Food')}</span>  {t('Journey')}
             </h1>
             <p className="my-4 fw-normal " style={{ maxWidth: '590px' }}>
-              Recipes to Explore, where Passion Meets Palate, and Every Dish is
-              a Symphony of Flavors / Because Every Meal Should be an
-              Experience!
+            {t('Recipes to Explore, where Passion Meets Palate, and Every Dish is a Symphony of Flavors')}
             </p>
             <button className="btn btn-success shadow-sm px-4">
               <Link to="/" className="text-white text-decoration-none">
-                Sign up
+              {t('Sign up')}
               </Link>
             </button>
             <p className="mt-2 fw-normal">
-              Do you have an accout?{' '}
+            {t('Do you have an account?')}{' '}
               <Link
                 to="/"
                 className="text-success text-decoration-none fw-bold"
               >
-                Log in
+                 {t('Log in')}
               </Link>
             </p>
           </div>

@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from '../Styles/Navbar.module.css';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { changeLanguage } from '../redux/slice/Language';
+import i18n from '../i18n.js';
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const currentLanguage = useSelector((state) => state.language.language);
+  // const { t } = useTranslation();
+  // const t = useTranslation();
+  // const {t, i18n} = useTranslation();
+  const [t, i18n] = useTranslation();
+  console.log(i18n)
+  console.log(t);
+
+  
+  const handleLanguageChange = (language) => {
+    console.log(language);
+    console.log(currentLanguage)
+    dispatch(changeLanguage(language));
+    i18n.changeLanguage(language);
+  };
+
+  useEffect(() => {
+    console.log('Current Language:', currentLanguage);
+    // console.log(t)
+  }, [currentLanguage]);
+
   return (
-    <div id="navBar">
+    <div id="navBar" dir={`${i18n.language}`==='en'?"ltr":"rtl"}>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
@@ -41,42 +67,59 @@ export default function Navbar() {
                   aria-current="page"
                   to="/home"
                 >
-                  Home
+                  {t('Home')}
                 </Link>
               </li>
               <li className="nav-item px-1">
                 <Link className="nav-link" to="/cuisine">
-                  Recipes
+                  {t('Recipes')}
                 </Link>
               </li>
               <li className="nav-item px-1">
                 <Link className="nav-link" to="/addrecpie">
-                  Add recipe
+                  {t('Add recipe')}
                 </Link>
               </li>
               <li className="nav-item px-1">
                 <Link className="nav-link" to="/">
-                  Blog
+                  {t('Blog')}
                 </Link>
               </li>
               <li className="nav-item px-1">
                 <Link className="nav-link" to="/">
-                  Contact us
+                  {t('Contact Us')}
                 </Link>
               </li>
             </ul>
           </div>
 
+          <div>
+            <button
+              className="btn btn-outline-success"
+              onClick={() => handleLanguageChange('en')}
+            >
+              En
+            </button>{' '}
+            &nbsp;
+            <button
+              className="btn btn-outline-success"
+              onClick={() => handleLanguageChange('ar')}
+            >
+              Ar
+            </button>{' '}
+            &nbsp;
+          </div>
+
           <div className="signUp d-none d-lg-block d-xl-block d-xxl-block">
             <button className="btn btn-light shadow-sm me-3 px-4">
               <Link className="nav-link" to="/">
-                Log in
+                {t('Log in')}
               </Link>
             </button>
 
             <button className="btn btn-success shadow-sm px-4">
               <Link className="nav-link" to="/">
-                Sign up
+                {t('Sign up')}
               </Link>
             </button>
           </div>
@@ -108,7 +151,6 @@ export default function Navbar() {
               1
             </div>
           </Link>
-
         </div>
       </nav>
     </div>

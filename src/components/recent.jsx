@@ -55,10 +55,10 @@ const Recent = () => {
                     style={{ cursor: 'pointer' }}
                     onClick={() => handleClick([meal])}
                   >
-                    <div className="border rounded h-100">
+                    <div className="border rounded h-100 overflow-hidden">
                       <div className="w-100">
                         <img
-                        style={{height: '300px', objectFit: 'cover'}}
+                        style={{maxHeight: '250px', objectFit: 'cover'}}
                           className="w-100"
                           src={meal.strMealThumb}
                           alt={meal.strMeal}
