@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 const SearchResult = ({ filteredData }) => {
-  console.log(filteredData);
+  const [displayCount, setDisplayCount] = useState(20);
 
   if (!filteredData) {
     return (
@@ -19,6 +19,10 @@ const SearchResult = ({ filteredData }) => {
   function handleClick(meal) {
     console.log(meal);
   }
+
+  const handleShowMore = () => {
+    setDisplayCount(displayCount + 4);
+  };
 
   return (
     <div className="row g-5">

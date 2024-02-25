@@ -82,7 +82,7 @@ export default function Country() {
         />
       </SearchContainer>
 
-      <CountryList/>
+        <CountryList/>
 
       <SearchResult filteredData={filteredRecipes}></SearchResult>
     </Container> */}

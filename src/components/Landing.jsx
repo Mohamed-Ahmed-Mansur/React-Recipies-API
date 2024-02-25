@@ -22,14 +22,14 @@ export default function Landing() {
             {t('Recipes to Explore, where Passion Meets Palate, and Every Dish is a Symphony of Flavors')}
             </p>
             <button className="btn btn-success shadow-sm px-4">
-              <Link to="/" className="text-white text-decoration-none">
+              <Link to="/signin" className="text-white text-decoration-none">
               {t('Sign up')}
               </Link>
             </button>
             <p className="mt-2 fw-normal">
             {t('Do you have an account?')}{' '}
               <Link
-                to="/"
+                to="/login"
                 className="text-success text-decoration-none fw-bold"
               >
                  {t('Log in')}

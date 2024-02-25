@@ -34,7 +34,7 @@ const Categories = () => {
           <div className="d-flex justify-content-between">
             <h2 style={{ fontWeight: '600' }}>Categories</h2>
             <button className="btn">
-              <Link className="text-success text-decoration-none fw-bold">
+              <Link to="/category" className="text-success text-decoration-none fw-bold">
                 View more
               </Link>
             </button>

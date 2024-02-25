@@ -12,6 +12,7 @@ import Country from "./country";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import AddRecipe from "./AddRecipe";
+import Login from "./Login";
 import Details from "../components/Details";
 import Cat from "../components/Cat";
 
@@ -23,8 +24,10 @@ const Pages = () => {
             <Provider store={store}>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<Signin />}></Route>
+                        <Route path="/" element={<Home />}></Route>
                         <Route path="/home" element={<Home />}></Route>
+                        <Route path="/signin" element={<Signin />}></Route>
+                        <Route path="/login" element={<Login />}></Route>
                         <Route path="/search" element={<Search />}></Route>
                         <Route path="/cuisine" element={<Cuisine />}></Route>
                         <Route path="/cuisine/:country" element={<Country />}></Route>

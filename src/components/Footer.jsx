@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../Styles/Footer.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "../Styles/Footer.module.css";
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
       <div
         id="footer"
         className="container-fluid"
-        style={{ backgroundColor: '#f5f5f5', margin: '2rem 0 1rem 0' }}
+        style={{ backgroundColor: '#f5f5f5', margin: '2rem 0 0 0' }}
       >
         <div className="row">
           <div className="d-flex align-items-start p-4 flex-wrap">

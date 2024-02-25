@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import YouTube from 'react-youtube';
-import { Box, Heading, Text, VStack, HStack, List, ListItem, Link, Checkbox, Divider } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Text,
+  VStack,
+  HStack,
+  List,
+  ListItem,
+  Link,
+  useColorModeValue,
+  Checkbox,
+  Divider,
+} from '@chakra-ui/react';
 
 const Details = () => {
     const state = useSelector((st) => st.getrecpie.getrecpie);
