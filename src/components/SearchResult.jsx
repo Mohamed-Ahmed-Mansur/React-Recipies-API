@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { getrecpie } from '../redux/slice/Getdetails';
+// import { getrecpie } from '../redux/slice/Getdetails';
 
 const SearchResult = ({ filteredData }) => {
   const [displayCount, setDisplayCount] = useState(21);
@@ -52,11 +53,11 @@ const SearchResult = ({ filteredData }) => {
                     className="position-absolute bg-white rounded py-1 px-2"
                     style={{ top: '10px', right: '20px' }}
                   >
-                    {/* <i class="bi bi-bookmark"></i> */}
-                    <i
+                    <i class="bi bi-bookmark"></i>
+                    {/* <i
                       className="bi bi-bookmark-fill"
                       style={{ color: '#198754' }}
-                    ></i>
+                    ></i> */}
                   </div>
                 </div>
 

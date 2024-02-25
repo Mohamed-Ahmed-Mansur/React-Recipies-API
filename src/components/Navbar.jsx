@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import style from "../Styles/Navbar.module.css";
@@ -15,6 +16,7 @@ export default function Navbar() {
   // const { t } = useTranslation();
   // const t = useTranslation();
   // const {t, i18n} = useTranslation();
+  // let logedInUser = useSelector((state) => state.logedInUser.logedInUser);
   const [t, i18n] = useTranslation();
   console.log(i18n)
   console.log(t);
@@ -109,13 +111,6 @@ export default function Navbar() {
                   Categories
                 </Link>
               </li>
-              {isAdmin && (
-                <li className="nav-item px-1">
-                  <Link className="nav-link" to="/addrecipe">
-                    Add recipe
-                  </Link>
-                </li>
-              )}
               <li className="nav-item px-1">
                 <Link className="nav-link" to="/blog">
                   {t('Blog')}
@@ -124,6 +119,11 @@ export default function Navbar() {
               <li className="nav-item px-1">
                 <Link className="nav-link" to="/contact">
                   {t('Contact Us')}
+                </Link>
+              </li>
+              <li className="nav-item px-1">
+                <Link className="nav-link" to="/premium">
+                  Premium Recipe
                 </Link>
               </li>
             </ul>
@@ -175,7 +175,7 @@ export default function Navbar() {
                   className="btn btn-light shadow-sm me-3 px-4"
                 >
                   <Link className="nav-link" to="/Home">
-                  {t('Log in')}
+                  {t('Log out')}
                   </Link>
                 </button>
               )}
@@ -187,7 +187,8 @@ export default function Navbar() {
             </div>
           </div>
 
-          <Link to={'/cart'} style={{ color: 'black', position: 'relative' }}>
+          <Link to='/cart' style={{ color: 'black', position: 'relative' }}>
+            <div>
             <i
               className="bi bi-cart3 p-2 mx-2  "
               style={{
@@ -212,7 +213,38 @@ export default function Navbar() {
                 transform: 'translate(25%, 25%)',
               }}
             >
-              1
+              {/* {counter}  */}
+              {logedInUser?.purchased.length||0}
+            </div>
+            </div>
+          </Link>
+          <Link to={"/fav"} style={{ color: "black", position: "relative" }}>
+            <i
+              className="bi bi-bookmark-fill p-2 mx-2  "
+              style={{
+                color: "#198754",
+                backgroundColor: "white",
+                border: "1px solid black",
+                borderRadius: "10px",
+                width: "60px",
+                height: "60px",
+                textAlign: "center",
+                cursor: "pointer",
+              }}
+            ></i>
+            <div
+              className="rounded-circle bg-success d-flex justify-content-center align-items-center"
+              style={{
+                color: "white",
+                width: "1.5rem",
+                height: "1.5rem",
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                transform: "translate(25%, 25%)",
+              }}
+            >
+              {logedInUser?.favourite?.length || 0}
             </div>
           </Link>
         </div>

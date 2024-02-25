@@ -17,6 +17,9 @@ const Signin = () => {
     firstName: "",
     lastName: "",
     isAdmin: false,
+    favourite: [],
+    purchasedDone: [],
+    purchased: []
   });
 
   const handlechange = (event) => {

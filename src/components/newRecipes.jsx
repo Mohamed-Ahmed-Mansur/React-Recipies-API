@@ -39,7 +39,7 @@ const NewRecipes = () => {
     <div style={{ marginBlock: "5em" }}>
       <div className="container-fluid">
         <div className="row g-5 mx-auto">
-          <h2 style={{ fontWeight: "700", fontSize: "3rem" }}>
+          <h2 style={{ fontWeight: "700", fontSize: "2rem" }}>
             Admin Recipes
           </h2>
           {data.map((recipe) => (
@@ -56,7 +56,7 @@ const NewRecipes = () => {
                       src={`./images/${recipe?.ImageName}`}
                       alt={recipe.title}
                     />
-                    <div
+                    {/* <div
                       className="position-absolute bg-white rounded py-1 px-2"
                       style={{ top: "10px", right: "20px" }}
                     >
@@ -64,7 +64,7 @@ const NewRecipes = () => {
                         className="bi bi-bookmark"
                         style={{ color: "#198754" }}
                       ></i>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="p-3 d-flex align-items-center">

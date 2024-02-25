@@ -94,16 +94,6 @@ const Popular = () => {
                         src={meal.strMealThumb}
                         alt={meal.strMeal}
                       />
-                      <div
-                        className="position-absolute bg-white rounded py-1 px-2"
-                        style={{ top: '10px', right: '20px' }}
-                      >
-                        {/* <i class="bi bi-bookmark"></i> */}
-                        <i
-                          className="bi bi-bookmark-fill"
-                          style={{ color: '#198754' }}
-                        ></i>
-                      </div>
                     </div>
 
                     <div className="p-3">

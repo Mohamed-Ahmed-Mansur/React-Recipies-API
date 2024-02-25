@@ -4,7 +4,7 @@
 // import Veggie from "../components/Veggie";
 import Popular from "../components/popular";
 import React, { useEffect } from "react";
-import Recent from "../components/recent";
+// import Recent from "../components/recent";
 import Categories from "../components/categories";
 import Footer from "../components/Footer";
 import Header from "../components/header";
@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 // import Blogs from "../components/Blogs";
 import axios from "axios";
 import NewRecipes from "../components/newRecipes";
+import RecentJ from "../components/recentJ";
 // import Blogs from "../components/Blogs";
 
 const Home = () => {
@@ -53,7 +54,8 @@ const Home = () => {
                 {/* <Veggie /> */}
                 <Popular />
                 <Categories />
-                <Recent />
+                {/* <Recent /> */}
+                <RecentJ />
             </div>
             <NewRecipes />
             {/* <Blogs /> */}

@@ -16,6 +16,9 @@ import Login from "./Login";
 import Details from "./Details";
 import Blog from "./blog";
 import Cat from "../components/Cat";
+import CartPage from "./CartPage";
+import Premiumpage from "./premiumpage";
+import FavPage from "./favPage";
 
 const Pages = () => {
 
@@ -34,11 +37,12 @@ const Pages = () => {
                         <Route path="/cuisine/:country" element={<Country />}></Route>
                         <Route path="/category" element={<Category />}></Route>
                         <Route path="/categories/:category" element={<Cat />}></Route>
-                        <Route path="/details/:id" element={<Details
-                        
-                         />}></Route>
+                        <Route path="/details/:id" element={<Details />}></Route>
+                        <Route path="/cart" element={<CartPage />}></Route>
+                        <Route path="/premium" element={<Premiumpage />}></Route>
+                        <Route path="/fav" element={<FavPage />}></Route>
                         <Route path="/addrecpie" element={<AddRecipe />}></Route>
-                        <Route path="/addrecipe/:id" element={<AddRecipe />}></Route>
+                        {/* <Route path="/addrecipe/:id" element={<AddRecipe />}></Route> */}
                         <Route path="/blog" element={<Blog />}></Route>
                         <Route path="/contact" element={<Contact />}></Route>
                         <Route path="*" element={<Error message="404 - Oops! Something went wrong." />}></Route>
