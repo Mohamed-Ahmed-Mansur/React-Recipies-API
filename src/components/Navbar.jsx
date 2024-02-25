@@ -1,17 +1,40 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { useEffect } from "react";
 import style from "../Styles/Navbar.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { useEffect } from "react";
 import { setLogedInUser } from "../redux/slice/logedInUser";
+import { useTranslation } from 'react-i18next';
+import { changeLanguage } from '../redux/slice/Language';
+import i18n from '../i18n.js';
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const currentLanguage = useSelector((state) => state.language.language);
+  // const { t } = useTranslation();
+  // const t = useTranslation();
+  // const {t, i18n} = useTranslation();
+  const [t, i18n] = useTranslation();
+  console.log(i18n)
+  console.log(t);
+
+  
+  const handleLanguageChange = (language) => {
+    console.log(language);
+    console.log(currentLanguage)
+    dispatch(changeLanguage(language));
+    i18n.changeLanguage(language);
+  };
+
+  useEffect(() => {
+    console.log('Current Language:', currentLanguage);
+    // console.log(t)
+  }, [currentLanguage]);
+
   let logedInUser = useSelector((state) => state.logedInUser.logedInUser);
   const [isAdmin, setisAdmin] = useState(false);
   let initials = "Guest";
-  const dispatch = useDispatch();
   
   useEffect(() => {
     if (logedInUser) {
@@ -36,13 +59,13 @@ export default function Navbar() {
   }
 
   return (
-    <div id="navBar">
+    <div id="navBar" dir={`${i18n.language}`==='en'?"ltr":"rtl"}>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             <div className="d-flex gap-2 align-items-center">
               <img
-                src={"images/chef.svg"}
+                src={"../images/chef.svg"}
                 alt="logo"
                 style={{ color: "#1c1c1c", width: "70px" }}
                 className={style.chefLogo}
@@ -73,12 +96,12 @@ export default function Navbar() {
                   aria-current="page"
                   to="/home"
                 >
-                  Home
+                  {t('Home')}
                 </Link>
               </li>
               <li className="nav-item px-1">
                 <Link className="nav-link" to="/cuisine">
-                  Recipes
+                  {t('Recipes')}
                 </Link>
               </li>
               <li className="nav-item px-1">
@@ -95,12 +118,12 @@ export default function Navbar() {
               )}
               <li className="nav-item px-1">
                 <Link className="nav-link" to="/blog">
-                  Blog
+                  {t('Blog')}
                 </Link>
               </li>
               <li className="nav-item px-1">
                 <Link className="nav-link" to="/contact">
-                  Contact us
+                  {t('Contact Us')}
                 </Link>
               </li>
             </ul>
@@ -121,11 +144,28 @@ export default function Navbar() {
               <p style={{ margin: "0", color: "black", fontSize: "1.2rem", fontWeight: "600" }}>{initials}</p>
             </div>
 
+          <div>
+            <button
+              className="btn btn-outline-success"
+              onClick={() => handleLanguageChange('en')}
+            >
+              En
+            </button>{' '}
+            &nbsp;
+            <button
+              className="btn btn-outline-success"
+              onClick={() => handleLanguageChange('ar')}
+            >
+              Ar
+            </button>{' '}
+            &nbsp;
+          </div>
+
             <div className="signUp d-none d-lg-block d-xl-block d-xxl-block">
               {!logedInUser && (
                 <button className="btn btn-light shadow-sm me-3 px-4">
                   <Link className="nav-link" to="/login">
-                    Log In
+                  {t('Log in')}
                   </Link>
                 </button>
               )}
@@ -135,13 +175,13 @@ export default function Navbar() {
                   className="btn btn-light shadow-sm me-3 px-4"
                 >
                   <Link className="nav-link" to="/Home">
-                    Log Out
+                  {t('Log in')}
                   </Link>
                 </button>
               )}
               <button className="btn btn-success shadow-sm px-4">
                 <Link className="nav-link" to="/signin">
-                  Sign up
+                {t('Sign up')}
                 </Link>
               </button>
             </div>

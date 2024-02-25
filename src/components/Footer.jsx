@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="d-flex flex-column col-md-12 col-lg-4">
               <div className="d-flex gap-2 align-items-center mb-3">
                 <img
-                  src={'images/chef.svg'}
+                  src={'../images/chef.svg'}
                   alt="logo"
                   style={{ color: '#1c1c1c', width: '70px' }}
                   className="chefLogo"

@@ -20,7 +20,7 @@ function Blog_cards() {
       <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={8}>
         {/* Card 1 */}
         <Card>
-          <Image src="images/blog_card1.jpeg" alt="Image 1" />
+          <Image src="/images/blog_card1.jpeg" alt="Image 1" />
           <CardHeader>
             <Heading size='md'>Creamy vegan sun-dried tomato and broccolini gnocchi</Heading>
           </CardHeader>

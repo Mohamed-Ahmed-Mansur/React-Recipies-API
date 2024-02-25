@@ -75,7 +75,7 @@ const Card = styled.div`
   }
 
   &:hover img {
-    transform: scale(1.1); /* Zoom in on hover */
+    transform: scale(1.1); 
   }
 `;
 

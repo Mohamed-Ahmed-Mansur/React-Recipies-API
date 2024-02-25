@@ -1,96 +1,105 @@
-import React from 'react';
-import { FaPizzaSlice } from "react-icons/fa";
-import { GiNoodles } from "react-icons/gi";
-import { FaHamburger } from "react-icons/fa";
-import { GiChopsticks } from "react-icons/gi";
-import { FaBowlFood } from "react-icons/fa6";
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { FaPizzaSlice } from 'react-icons/fa';
+import { GiNoodles } from 'react-icons/gi';
+import { FaHamburger } from 'react-icons/fa';
+import { GiChopsticks } from 'react-icons/gi';
+import { FaBowlFood } from 'react-icons/fa6';
+import { NavLink, useParams } from 'react-router-dom';
 
 const CountryList = () => {
+  const [currCountry, setCurrCountry] = useState('');
 
-    return (
-        <List>
-            <SLink to={'/cuisine/Italian'}>
-                <FaPizzaSlice size={36} />
-                <h4>Italian</h4>
-            </SLink>
-            <SLink to={'/cuisine/American'}>
-                <FaHamburger size={36} />
-                <h4>American</h4>
-            </SLink>
-            <SLink to={'/cuisine/Thai'}>
-                <GiNoodles size={36} />
-                <h4>Thai</h4>
-            </SLink>
-            <SLink to={'/cuisine/Japanese'}>
-                <GiChopsticks size={36} />
-                <h4>Japanese</h4>
-            </SLink>
-            <SLink to={'/cuisine/Egyptian'}>
-                <FaBowlFood size={36} />
-                <h4>Egyptian</h4>
-            </SLink>
-        </List>
-    );
-}
+  const { country } = useParams();
 
-const List = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 2rem 0rem;
+  useEffect(() => {
+    setCurrCountry(country);
+    console.log(currCountry);
+  }, [country]);
 
-    @media (max-width: 780px) {
-        flex-wrap: wrap;
-        gap: 2rem;
-        justify-content: center;
-    }
-`;
+  return (
+    <div>
+      <div className="d-flex justify-content-between align-items-center">
+        <h5 style={{ fontWeight: '600' }}>Country</h5>
 
-const SLink = styled(NavLink)`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    margin-right: 2rem;
-    text-decoration: none;
-    background: linear-gradient(35deg, #494949, #313131);
-    width: 6rem;
-    height: 6rem;
-    cursor: pointer;
-    transform: scale(1);
-    transition: transform 0.3s ease-in-out;
+        <NavLink to={'/cuisine'}>
+          <h4
+            className="text-success"
+            style={{ fontSize: '1rem', fontWeight: '400' }}
+          >
+            Clear
+          </h4>
+        </NavLink>
+      </div>
 
-    h4 {
-        color: white;
-        font-size: 0.8rem;
-    }
-
-    svg {
-        color: white;
-        font-size: 1.5rem;
-    }
-
-    &.active {
-        background: linear-gradient(to right, #4fd585, #24aa5a);
-
-        svg {
-            color: white;
-        }
-
-        h4 {
-            color: white;
-        }
-    }
-
-    &:hover {
-        transform: scale(1.1);
-    }
-
-    @media (max-width: 480px) {
-        margin: 1rem;
-    }
-`;
+      <div id="countryList">
+        <NavLink className="listCountry" to={'/cuisine/Italian'}>
+          <FaPizzaSlice
+            size={20}
+            className={currCountry === 'Italian' ? 'text-success' : 'text-dark'}
+          />
+          <h4
+            className={currCountry === 'Italian' ? 'text-success' : 'text-dark'}
+          >
+            Italian
+          </h4>
+        </NavLink>
+        <NavLink className="listCountry" to={'/cuisine/American'}>
+          <FaHamburger
+            size={20}
+            className={
+              currCountry === 'American' ? 'text-success' : 'text-dark'
+            }
+          />
+          <h4
+            className={
+              currCountry === 'American' ? 'text-success' : 'text-dark'
+            }
+          >
+            American
+          </h4>
+        </NavLink>
+        <NavLink className="listCountry" to={'/cuisine/Thai'}>
+          <GiNoodles
+            size={20}
+            className={currCountry === 'Thai' ? 'text-success' : 'text-dark'}
+          />
+          <h4 className={currCountry === 'Thai' ? 'text-success' : 'text-dark'}>
+            Thai
+          </h4>
+        </NavLink>
+        <NavLink className="listCountry" to={'/cuisine/Japanese'}>
+          <GiChopsticks
+            size={20}
+            className={
+              currCountry === 'Japanese' ? 'text-success' : 'text-dark'
+            }
+          />
+          <h4
+            className={
+              currCountry === 'Japanese' ? 'text-success' : 'text-dark'
+            }
+          >
+            Japanese
+          </h4>
+        </NavLink>
+        <NavLink className="listCountry" to={'/cuisine/Egyptian'}>
+          <FaBowlFood
+            size={20}
+            className={
+              currCountry === 'Egyptian' ? 'text-success' : 'text-dark'
+            }
+          />
+          <h4
+            className={
+              currCountry === 'Egyptian' ? 'text-success' : 'text-dark'
+            }
+          >
+            Egyptian
+          </h4>
+        </NavLink>
+      </div>
+    </div>
+  );
+};
 
 export default CountryList;

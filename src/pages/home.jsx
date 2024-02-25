@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // import Categories from "../components/Categories";
 // import Veggie from "../components/Veggie";
+// import Veggie from "../components/Veggie";
 import Popular from "../components/popular";
 import React, { useEffect } from "react";
 import Recent from "../components/recent";

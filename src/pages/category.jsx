@@ -1,17 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
 import Search from '../components/Search';
+import CategoryList from '../components/CategoryList';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const Category = () => {
-    const [category, setCategory] = useState([]);
-    const categoriesArr = JSON.parse(localStorage.getItem("Categories_List")).map(category => {
-        return category.strCategory
-    });
-    // console.log(categoriesArr)
+  const [category, setCategory] = useState([]);
+  const categoriesArr = JSON.parse(localStorage.getItem('Categories_List')).map(
+    (category) => {
+      return category.strCategory;
+    }
+  );
+  //   console.log(categoriesArr)
 
     async function getCategoriesData(category) {
         const check = localStorage.getItem(category);
@@ -25,32 +27,43 @@ const Category = () => {
         }
     }
 
-    function getCategories() {
-        categoriesArr.map(country => {
-            return getCategoriesData(country);
-        });
-    }
+  function getCategories() {
+    categoriesArr.map((country) => {
+      return getCategoriesData(country);
+    });
+  }
 
-    useEffect (() =>{   
-        getCategories();
-    }, []);
+  useEffect(() => {
+    getCategories();
+  }, []);
 
-    console.log("Cuisine component rendered");
-    console.log(category)
+  console.log('Cuisine component rendered');
+  console.log(category);
 
-    return (
-        <>
-            <Navbar />
-            <Container>
-                <Search allData={category} />
-            </Container>
-            <Footer />
-        </>
-    );
-}
+  return (
+    <>
+      <Navbar></Navbar>
+      <div className="container-fluid cuisine" style={{ padding: '2rem' }}>
+        <div className="row">
+          <div className="col-12">
+            <div className="banner Catbanner rounded-4 overflow-hidden d-flex align-items-center justify-content-center">
+              <h1>Categories</h1>
+            </div>
+          </div>
+        </div>
 
-const Container = styled.div`
-    padding: 2rem;
-`;
+        <div id="search" className="row my-5">
+          <div className="col-md-2">
+            <CategoryList categoriesArr={categoriesArr} />
+          </div>
+          <div className="col-md-10 ps-4">
+            <Search allData={category} />
+          </div>
+        </div>
+      </div>
+      <Footer></Footer>
+    </>
+  );
+};
 
 export default Category;

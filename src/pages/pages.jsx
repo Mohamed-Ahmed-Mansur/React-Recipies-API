@@ -15,6 +15,7 @@ import AddRecipe from "./AddRecipe";
 import Login from "./Login";
 import Details from "./Details";
 import Blog from "./blog";
+import Cat from "../components/Cat";
 
 const Pages = () => {
 
@@ -32,8 +33,11 @@ const Pages = () => {
                         <Route path="/cuisine" element={<Cuisine />}></Route>
                         <Route path="/cuisine/:country" element={<Country />}></Route>
                         <Route path="/category" element={<Category />}></Route>
-                        <Route path="/details/:id" element={<Details />}></Route>
-                        <Route path="/addrecipe" element={<AddRecipe />}></Route>
+                        <Route path="/categories/:category" element={<Cat />}></Route>
+                        <Route path="/details/:id" element={<Details
+                        
+                         />}></Route>
+                        <Route path="/addrecpie" element={<AddRecipe />}></Route>
                         <Route path="/addrecipe/:id" element={<AddRecipe />}></Route>
                         <Route path="/blog" element={<Blog />}></Route>
                         <Route path="/contact" element={<Contact />}></Route>
