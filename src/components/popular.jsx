@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { getrecpie } from '../redux/slice/Getdetails';
 import { useNavigate } from 'react-router-dom';
@@ -52,7 +51,7 @@ const Popular = () => {
       <div id="categories" className="mb-3" style={{ marginTop: '5em' }}>
         <div className="container-fluid mb-4">
           <div className="row">
-            <h2 style={{ fontWeight: '600' }}>Popular Picks</h2>
+            <h2 style={{ fontWeight: '700', fontSize: "3rem" }}>Popular Picks</h2>
           </div>
         </div>
         <Splide
@@ -106,8 +105,9 @@ const Popular = () => {
                     </div>
 
                     <div className="p-3">
-                      <h5 className="fw-700">{meal.strMeal}</h5>
-                      <p className="m-0 text-muted">{meal.strArea}</p>
+                      <h5 className="fw-700" style={{ fontSize: "2rem"}}>{meal.strMeal}</h5>
+                      <p className="m-0 text-muted" style={{ fontWeight: "700"}}>{meal.strArea}</p>
+                      <p className="m-0 text-muted" style={{ fontWeight: "700"}}>{meal.strCategory}</p>
                     </div>
                   </div>
                 </div>

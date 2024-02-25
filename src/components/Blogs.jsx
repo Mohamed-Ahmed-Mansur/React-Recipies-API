@@ -4,10 +4,10 @@ const Blogs = () => {
   return (
     <>
     <br></br>
-    <h1 className="demo">Blog</h1>
+    <h1 className="demo" style={{ fontWeight: '700', fontSize: "3rem" }}>Blog</h1>
     <br></br>
-    <div className="blogs-container">
-     
+    <div className="blogs-container" style={{ height: 'auto' }}>
+      
       <div className="blog">
         <img src="/images/Health-Benefits-Of-Fasting-In-Ramadan-01-800x800-1.jpg" alt="Blog 1" className="blog-image" />
         <h2>Benefits of Fasting</h2>
@@ -80,4 +80,3 @@ styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
 
 export default Blogs;
-

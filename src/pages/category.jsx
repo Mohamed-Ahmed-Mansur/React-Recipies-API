@@ -21,7 +21,7 @@ const Category = () => {
             const { data: { meals } } = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
             // console.log(meals)
             setCategory(pre => [...pre, ...meals]);
-            localStorage.setItem(category, JSON.stringify(meals))
+            localStorage.setItem(category, JSON.stringify(meals));
         }
     }
 

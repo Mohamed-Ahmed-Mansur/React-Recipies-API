@@ -28,7 +28,7 @@ const SearchResult = ({ filteredData }) => {
     <div style={{ marginBlock: '5em' }}>
       <div className="container-fluid">
         <div className="row g-5 mx-auto">
-          {filteredData.slice(0, displayCount).map((data) => {
+          {filteredData.slice(0, displayCount)?.map((data) => {
             return (
               <div className="col-lg-3 col-md-4 col-sm-6" key={data.idMeal}>
                 <div

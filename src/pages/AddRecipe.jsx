@@ -1,6 +1,10 @@
-import React, { useState, useRef } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { MdCloudUpload } from 'react-icons/md';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const Upload = styled.label`
   display: flex;
@@ -19,6 +23,7 @@ const HiddenInput = styled.input`
 `;
 
 const AddRecipe = () => {
+  const { id } = useParams();
   const [recipe, setRecipe] = useState({
     title: '',
     ingredients: [],
@@ -32,6 +37,13 @@ const AddRecipe = () => {
     Cuisine: '',
     RecipeImage: ''
   });
+
+  async function getDataById() {
+    const { data } = await axios.get(`http://localhost:3001/Admin/${id}`);
+
+    setRecipe({...data, RecipeImage: ""})
+    // console.log(data);
+  }
 
   const fileInputRef = useRef(null);
   const [inputFields, setInputFields] = useState([]);
@@ -66,14 +78,44 @@ const AddRecipe = () => {
       PrepTimeHours: '',
       PrepTimeMins: '',
       Cuisine: '',
-      RecipeImage: ''
+      RecipeImage: '',
+      ImageName: ''
     });
   };
 
   const handleImage = (e) => {
     const file = e.target.files[0];
-    setRecipe({ ...recipe, RecipeImage: file });
+    console.log(file)
+    setRecipe(pre => ({ ...pre, RecipeImage: file }));
+    setRecipe(pre => ({ ...pre, ImageName: pre.RecipeImage.name }))
   };
+
+  async function postData() {
+    await axios.post("http://localhost:3001/Admin", recipe);
+  }
+
+  function handleAlert() {
+    const alert = Object.values(recipe).map(val => {
+      if(val === "" || typeof val[0] === "undefined") {
+        return "false";
+      }
+      return "true";
+    });
+    if (!alert.splice(0, alert.length - 2).includes("false")) {
+      postData();
+      Swal.fire({
+        title: "Your Recpie added successfully!",
+        text: "You clicked the button!",
+        icon: "success"
+      });
+    }
+  }
+
+  useEffect(() => {
+    if (id) {
+      getDataById();
+    }
+  }, [])
 
   return (
     <div className='m-4'>
@@ -243,7 +285,9 @@ const AddRecipe = () => {
 
 
           <div className='d-flex justify-content-center m-4'>
-            <button className='btn btn-success w-25' type="submit">Save</button>
+            <button className='btn btn-success w-25' type="submit" onClick={handleAlert}>
+              Save
+            </button>
           </div>
         </form>
       </div>

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { getrecpie } from '../redux/slice/Getdetails';
 
 const Recent = () => {
   const [recent, setRecent] = useState([]);
@@ -31,7 +32,7 @@ const Recent = () => {
 
   function handleClick(meal) {
     console.log(meal);
-    dispatch(getRecent(meal));
+    dispatch(getrecpie(meal));
     navigate(`/Details/${meal[0].idMeal}`);
   }
 
@@ -44,7 +45,7 @@ const Recent = () => {
       <div style={{ marginBlock: '5em' }}>
         <div className="container-fluid">
           <div className="row g-5 mx-auto">
-            <h2 style={{ fontWeight: '600' }}>Recent recipes</h2>
+            <h2 style={{ fontWeight: '700', fontSize: "3rem" }}>Explore Recipes</h2>
             {recent.map((data, index) => {
               const meal = data.meals ? data.meals[0] : null;
               if (!meal) return null;
@@ -67,7 +68,9 @@ const Recent = () => {
                           className="position-absolute bg-white rounded py-1 px-2"
                           style={{ top: '10px', right: '20px' }}
                         >
-                          <i class="bi bi-bookmark" style={{ color: '#198754' }}></i>
+                          <i class="bi bi-bookmark" style={{ color: '#198754' }} onClick={() => {
+                            console.log("here")
+                          }}></i>
                           {/* <i
                             className="bi bi-bookmark-fill"
                             style={{ color: '#198754' }}
@@ -76,8 +79,9 @@ const Recent = () => {
                       </div>
 
                       <div className="p-3">
-                        <h5 className="fw-700">{meal.strMeal}</h5>
-                        <p className="m-0 text-muted">{meal.strArea}</p>
+                        <h5 className="fw-700" style={{ fontSize: "1.5rem"}}>{meal.strMeal}</h5>
+                        <p className="m-0 text-muted" style={{ fontWeight: "500"}}>{meal.strArea}</p>
+                        <p className="m-0 text-muted" style={{ fontWeight: "500"}}>{meal.strCategory}</p>
                       </div>
                     </div>
                   </div>

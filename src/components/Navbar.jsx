@@ -106,6 +106,7 @@ export default function Navbar() {
             </ul>
           </div>
           <div className="d-flex align-items-center ms-auto">
+            {initials === "Guest" ? <p style={{ margin: "1rem", color: "black", fontSize: "1.2rem" }}>Please sign in</p> : <p style={{ margin: "1rem", color: "black", fontSize: "1.2rem" }}>Welcome</p>}
             <div
               className="User d-flex align-items-center justify-content-center"
               style={{
@@ -117,7 +118,7 @@ export default function Navbar() {
                 marginRight: "10px",
               }}
             >
-              <p style={{ margin: "0", color: "black" }}>{initials}</p>
+              <p style={{ margin: "0", color: "black", fontSize: "1.2rem", fontWeight: "600" }}>{initials}</p>
             </div>
 
             <div className="signUp d-none d-lg-block d-xl-block d-xxl-block">

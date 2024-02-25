@@ -25,14 +25,17 @@ const Categories = () => {
     getCategories();
   }, []);
 
-  const displayedCategories = categories.slice(0, 8);
+  const displayedCategories = categories.slice(0, 12);
 
+  console.log("Categories component rendered");
+  console.log(displayedCategories);
+  
   return (
     <div className="mb-2" style={{ marginTop: '5em' }}>
       <div className="container-fluid">
         <div className="row g-5 mx-auto">
           <div className="d-flex justify-content-between">
-            <h2 style={{ fontWeight: '600' }}>Categories</h2>
+            <h2 style={{ fontWeight: '700', fontSize: "3rem" }}>Categories</h2>
             <button className="btn">
               <Link to="/category" className="text-success text-decoration-none fw-bold">
                 View more
@@ -40,15 +43,17 @@ const Categories = () => {
             </button>
           </div>
           <Container>
-            {displayedCategories.map((category) => (
+            {displayedCategories?.map((category) => (
               <Card key={category.idCategory}>
-                <Category>
-                  <CategoryImage
-                    src={category.strCategoryThumb}
-                    alt={category.strCategory}
-                  />
-                  <CategoryName>{category.strCategory}</CategoryName>
-                </Category>
+                <Link className="nav-link" to="/category">
+                  <Category>
+                    <CategoryImage
+                      src={category.strCategoryThumb}
+                      alt={category.strCategory}
+                    />
+                    <CategoryName>{category.strCategory}</CategoryName>
+                  </Category>
+                </Link>
               </Card>
             ))}
           </Container>
@@ -77,7 +82,7 @@ const Card = styled.div`
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   gap: 20px;
   
   @media (max-width: 767px) {

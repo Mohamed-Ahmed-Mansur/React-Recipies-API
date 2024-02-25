@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { usersAction } from "../redux/slice/users";
 import { setLogedInUser } from "../redux/slice/logedInUser";
+import Socailf from "../components/Socailf";
+import SocialG from "../components/Socialgoogle";
 
 const Login = () => {
   const Users = useSelector((state) => state.users.users);
@@ -118,30 +120,26 @@ const Login = () => {
 
                   <div className="text-center">
                     <p>or sign up with:</p>
-                    <button
-                      type="button"
-                      className=" btn btn-link btn-floating mx-1 "
-                    >
-                      <a href="https://www.facebook.com/login/">
-                        <i className="fab fa-facebook-f btngreen"></i>
-                      </a>
-                    </button>
+                    <div>
+                      <div>
+                        <button
+                          type="button"
+                          className=" btn btn-link btn-floating mx-1 "
+                        >
+                          <Socailf />
+                        </button>
 
-                    <button
-                      type="button"
-                      className="  btn btn-link btn-floating mx-1"
-                    >
-                      <i className="fab fa-google btngreen"></i>
-                    </button>
+                        {/* <Google /> */}
 
-                    <button
-                      type="button"
-                      className="  btn btn-link btn-floating mx-1 "
-                    >
-                      <a href="https://twitter.com/i/flow/login?lang=en">
-                        <i className="fab fa-twitter btngreen"></i>
-                      </a>
-                    </button>
+                        <button
+                          type="button"
+                          className="  btn btn-link btn-floating mx-1 "
+                          style={{ height: "3.5rem" }}
+                        >
+                          <SocialG />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </form>
               </div>

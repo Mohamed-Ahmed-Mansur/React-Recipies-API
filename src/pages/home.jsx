@@ -9,11 +9,33 @@ import Footer from "../components/Footer";
 import Header from "../components/header";
 import Admin from "../components/admin";
 import { useSelector } from "react-redux";
-import Blogs from "../components/Blogs";
+// import Blogs from "../components/Blogs";
+import axios from "axios";
+import NewRecipes from "../components/newRecipes";
 // import Blogs from "../components/Blogs";
 
 const Home = () => {
     let logedInUser = useSelector((state) => state.logedInUser.logedInUser);
+    const countriesArr = ["Egyptian", "American", "Italian", "Thai", "Japanese"];
+
+    async function getCountryData(country) {
+        const check = localStorage.getItem(country);
+        if (!check) {
+            const { data: { meals } } = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`);
+            // console.log(meals)
+            localStorage.setItem(country, JSON.stringify(meals));
+        }
+    }
+
+    function getCuisine() {
+        countriesArr.map(country => {
+            return getCountryData(country);
+        });
+    }
+
+    useEffect (() =>{   
+        getCuisine();
+    }, []);
 
     useEffect(() => {
      
@@ -31,8 +53,9 @@ const Home = () => {
                 <Popular />
                 <Categories />
                 <Recent />
-                <Blogs />
             </div>
+            <NewRecipes />
+            {/* <Blogs /> */}
             <Footer />
         </>
     );

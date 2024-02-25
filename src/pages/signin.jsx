@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { usersAction, usersPostAction } from "../redux/slice/users";
 import { useEffect } from "react";
-import Social from "../components/social";
+import Socailf from "../components/Socailf";
+import SocialG from "../components/Socialgoogle";
 
 const Signin = () => {
   let Users = useSelector((state) => state.users.users);
@@ -25,6 +26,28 @@ const Signin = () => {
       [name]: value,
     }));
   };
+
+  function calculateStorageUsage() {
+    let totalUsage = 0;
+  
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const item = localStorage.getItem(key);
+  
+      // Calculate the size of the item (approximately)
+      const itemSize = key.length + item.length;
+  
+      // Add the size of the item to the total usage
+      totalUsage += itemSize;
+    }
+  
+    return totalUsage;
+  }
+  
+  // Calculate and log the total storage usage
+  const totalUsage = calculateStorageUsage();
+  console.log(`Total storage usage: ${totalUsage} bytes`);
+  
 
   const handleclick = (event) => {
     event.preventDefault();
@@ -52,11 +75,11 @@ const Signin = () => {
   };
   useEffect(() => {
     dispatch(usersAction());
+    calculateStorageUsage();
   }, [dispatch]);
 
   return (
     <>
-    <Social />
     <section className="text-center text-lg-start">
       <style>
         {`
@@ -168,25 +191,24 @@ const Signin = () => {
                   {/* Register buttons */}
                   <div className="text-center">
                     <p>or sign up with:</p>
-                    <button
-                      type="button"
-                      className=" btn btn-link btn-floating mx-1 "
-                    >
-                      <a href="https://www.facebook.com/login/">
-                        <i className="fab fa-facebook-f btngreen"></i>
-                      </a>
-                    </button>
+                    <div>
+                      <button
+                        type="button"
+                        className=" btn btn-link btn-floating mx-1 "
+                      >
+                        <Socailf />
+                      </button>
 
-                    {/* <Google /> */}
+                      {/* <Google /> */}
 
-                    <button
-                      type="button"
-                      className="  btn btn-link btn-floating mx-1 "
-                    >
-                      <a href="https://twitter.com/i/flow/login?lang=en">
-                        <i className="fab fa-twitter btngreen"></i>
-                      </a>
-                    </button>
+                      <button
+                        type="button"
+                        className="  btn btn-link btn-floating mx-1 "
+                        style={{ height: "3.5rem" }}
+                      >
+                        <SocialG />
+                      </button>
+                    </div>
                   </div>
                 </form>
               </div>

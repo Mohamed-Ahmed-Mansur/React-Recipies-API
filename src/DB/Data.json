@@ -31,5 +31,26 @@
       "lastName": "asd",
       "isAdmin": false
     }
+  ],
+  "Admin": [
+    {
+      "id": "4843",
+      "title": "erger",
+      "ingredients": [
+        "reg"
+      ],
+      "descriptions": "reeg",
+      "instructions": [
+        "reg"
+      ],
+      "Servings": "erg",
+      "CookingTimeHours": "65",
+      "CookingTimeMins": "56",
+      "PrepTimeHours": "5",
+      "PrepTimeMins": "5",
+      "Cuisine": "Egyptian",
+      "RecipeImage": {},
+      "ImageName": "7.jpg"
+    }
   ]
 }

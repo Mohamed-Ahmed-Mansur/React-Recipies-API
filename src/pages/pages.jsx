@@ -13,7 +13,8 @@ import store from "../redux/store";
 import { Provider } from "react-redux";
 import AddRecipe from "./AddRecipe";
 import Login from "./Login";
-import Details from "../components/Details";
+import Details from "./Details";
+import Blog from "./blog";
 
 const Pages = () => {
 
@@ -33,6 +34,8 @@ const Pages = () => {
                         <Route path="/category" element={<Category />}></Route>
                         <Route path="/details/:id" element={<Details />}></Route>
                         <Route path="/addrecipe" element={<AddRecipe />}></Route>
+                        <Route path="/addrecipe/:id" element={<AddRecipe />}></Route>
+                        <Route path="/blog" element={<Blog />}></Route>
                         <Route path="/contact" element={<Contact />}></Route>
                         <Route path="*" element={<Error message="404 - Oops! Something went wrong." />}></Route>
                     </Routes>
